@@ -1,0 +1,12 @@
+# binaries
+intcode_vm
+intcode_vm.obj
+intcode_vm.exe
+
+# misc
+*.lnk
+input*.txt
+session.txt
+
+# not yet
+intcode_cc.py
