@@ -67,7 +67,7 @@ void calc_unmarked_sum(int score, int board, int numbers, int upto) {
 
 void main() {
     int numbers[100];
-    int boards[25000];
+    int boards[2500];
     int buffer[20];
     int i_read;
     int B;
