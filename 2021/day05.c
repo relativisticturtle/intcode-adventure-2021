@@ -120,7 +120,7 @@ void main() {
         }
     }
 
-    printd(counter); // 23291 too high
+    printd(counter); // 19939
     printlf();
 
 }
