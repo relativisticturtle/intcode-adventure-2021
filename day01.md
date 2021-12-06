@@ -1,6 +1,10 @@
-# Day 1
+---
+day: 1
+day00: 01
+---
+# Day {page.day}
 
-**Puzzle:** [Sonar Sweep](https://adventofcode.com/2021/day/1)
+**Puzzle:** [Sonar Sweep](https://adventofcode.com/2021/day/{page.day})
 
 Fun fact: My IntCode-programs always begin with an "increment relative base" instruction in "immediate mode" (see next section), and by *some random chance(?)* my input started with the number `109`, the *exact* integer code of this particular instruction.
 
@@ -15,29 +19,6 @@ Store all sonar values in a list, then:
 - Part 2: Count number of `v[i-3] < v[i]`. 
 
 The biggest shock was that the IntCode-compiler tool did not crash or reveal new bugs - and that I *actually* got the right answers!
-
-**Code:**
-
-{% capture RAW_CLITE %}
-{% include_relative 2021/day01.c %}
-{% endcapture %}
-{% capture RAW_INTCODE %}
-{% include_relative 2021/day01.intc %}
-{% endcapture %}
-
-C lite
-
-```c
-{{RAW_CLITE}}
-```
-
-IntCode
-
-```
-{{RAW_INTCODE}}
-```
-
-&nbsp;
 
 # What is IntCode?
 IntCode was invented for, and heavily featured in, the [Advent of Code 2019](https://adventofcode.com/2019). While IntCode (and many other [esotoric languages](https://esolangs.org/wiki/Esoteric_programming_language)) may be referred to as a *language*, I think that *instruction set* would be a more appropriate term. The "code" consists of a single line of comma-separated integers, like so:
@@ -92,3 +73,26 @@ We can now decode the IntCode-program stated above:
 ```
 
 This program echo's its input indefinitely until it receives a `0`, after which it halts.
+
+&nbsp;
+
+# Code solutions
+
+**IntCode:** [2021/day01.intc](2021/day01.intc)
+{% capture RAW_INTCODE %}
+{% include_relative 2021/day01.intc %}
+{% endcapture %}
+
+```
+{{RAW_INTCODE}}
+```
+
+**C lite:** [2021/day01.c](2021/day01.c)
+{% capture RAW_CLITE %}
+{% include_relative 2021/day01.c %}
+{% endcapture %}
+
+```c
+{{RAW_CLITE}}
+```
+

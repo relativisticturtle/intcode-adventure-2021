@@ -7,7 +7,5 @@ relative_links:
 include:
   - README.md
   - prologue.md
-  - day01.md
-  - 2021/*.c
-  - 2021/*.intc
+  - day*.md
   

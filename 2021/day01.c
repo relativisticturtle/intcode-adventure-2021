@@ -1,10 +1,7 @@
-//
-// python intcode_cc.py -i math.c string.c 2021/day01.c -o 2021/day01.intc && intcode_vm 2021/day01.intc < 2021/input01.txt
-//
-
+// python intcode_cc.py -i math.c string.c 2021/day01.c -o 2021/day01.intc
+// intcode_vm 2021/day01.intc < 2021/input01.txt
 
 int input[2000];
-int divres[2];
 
 void main() {
     int buffer[20];
