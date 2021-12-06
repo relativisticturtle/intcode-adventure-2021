@@ -12,7 +12,7 @@ Simple strategy: store all sonar values in a list.
 
 - Part 2: Count number of `v[i-3] < v[i]`. 
 
-The biggest shock was that the IntCode-compiler tool did not crash or reveal new bugs - and that I `actually` got the right answers!
+The biggest shock was that the IntCode-compiler tool did not crash or reveal new bugs - and that I *actually* got the right answers!
 
 # What is IntCode?
 IntCode was invented for, and heavily featured in, the [Advent of Code 2019](https://adventofcode.com/2019). While IntCode (and many other [esotoric languages](https://esolangs.org/wiki/Esoteric_programming_language)) may be referred to as a *language*, I think that *instruction set* would be a more appropriate term. The "code" consists of a single line of comma-separated integers, like so:
@@ -51,7 +51,7 @@ The jump-instructions sets the instruction pointer to the value in `Z` when the 
 | `1`, immediate mode            | Value of the parameter itself                |
 | `2`, relative mode             | Value at this parameter-index *relative* `RB`|
 
-**Note 1:** Not all parameter modes are allowed for all operations. E.g., you can add and multiply with a `5` (immediate mode), but it wouldn't make sense `assign` to a `5`.
+**Note 1:** Not all parameter modes are allowed for all operations. E.g., you can add and multiply with a `5` (immediate mode), but it wouldn't make sense to *assign* to a `5`.
 
 **Note 2:** "value at this parameter-index" refers to the memory of integers where *also* the code itself lives. I.e., an IntCode-program of `L` integers occupies the memory from index `0` to `L - 1`. After that all indices contains `0`'s until set otherwise. Negative indices are not allowed.
 
