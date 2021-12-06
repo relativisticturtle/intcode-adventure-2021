@@ -1,6 +1,5 @@
-//
-// python intcode_cc.py -i math.c string.c 2021/day03.c -o 2021/day03.intc && intcode_vm 2021/day03.intc < 2021/input03.txt
-//
+// python intcode_cc.py -i math.c string.c 2021/day03.c -o 2021/day03.txt
+// intcode_vm 2021/day03.txt < 2021/input03.txt
 
 int input[12000];
 
@@ -61,7 +60,7 @@ void main() {
             e_rate += 1;
         }
     }
-    printd(g_rate*e_rate);
+    printd(g_rate*e_rate); // 845186
     printlf();
 
 
@@ -149,6 +148,6 @@ void main() {
             c_rate += 1;
         }
     }
-    printd(o_rate*c_rate);
+    printd(o_rate*c_rate); // 4636702
     printlf();
 }

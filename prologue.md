@@ -10,7 +10,7 @@ Pulling yourself together you switch on the radio to contact the Elves.
 
 Silence. Maybe the Elves have switched to frequency-hopping communication? You start to twist the radio’s frequency dial back-and-forth until you pick up a faint signal from one of the Elves nearby ships.
 
-"*bzzz… could not help that I tripped …bzzz… and who even put their dark olive bag there? …bzzz…. [policy](https://adventofcode.com/2020/day/7) dictates they should always be stowed in a shiny gold bag.*"
+"*bzzz… could not help that I tripped …bzzz… and who even put their dark olive bag there? …bzzz…. [policy](https://adventofcode.com/2020/day/7) dictates that they should always be stowed in a shiny gold bag.*"
 
 "Millenium Penguin to the Elf-ship. Millenium Penguin to the Elf-ship. Do you copy? Over."
 
@@ -28,7 +28,7 @@ Silence. Maybe the Elves have switched to frequency-hopping communication? You s
 
 "*bzzz… a moment …bzzz… urgent situation on our hands …bzzz… no submarine and …bzzz… where can we find a volunteer …bzzz…*"
 
-"*bzzz… had a great idea! …bzzz… this schematic of the space capsule …bzzz… minor modifications needed.*"
+"*bzzz… just had a great idea! …bzzz… this schematic of the space capsule …bzzz… minor modifications needed.*"
 
 "*bzzz… are you still there? we are coming to pick you up now.*"
 

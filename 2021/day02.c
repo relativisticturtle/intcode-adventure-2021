@@ -1,6 +1,5 @@
-//
-// python intcode_cc.py -i math.c string.c 2021/day02.c -o 2021/day02.intc && intcode_vm 2021/day02.intc < 2021/input02.txt
-//
+// python intcode_cc.py -i math.c string.c 2021/day02.c -o 2021/day02.txt
+// intcode_vm 2021/day02.txt < 2021/input02.txt
 
 void main() {
     int buffer[20];
@@ -26,15 +25,15 @@ void main() {
         scans(b2, 20, 10, &i_read);
 
         str2int(b2, &l);
-        if(buffer[0] == 117) {      // u
+        if(buffer[0] == 117) {          // u
             y1 -= l;
             aim -= l;
         }
-        else if(buffer[0] == 100) { // d
+        else if(buffer[0] == 100) {     // d
             y1 += l;
             aim += l;
         }
-        else if(buffer[0] == 102) { // f
+        else if(buffer[0] == 102) {     // f
             x1 += l;
             y2 += aim * l;
             x2 += l;
@@ -47,6 +46,6 @@ void main() {
 
     printd(x1 * y1); // 2120749
     printlf();
-    printd(x2 * y2); // 4294967295
+    printd(x2 * y2); // 2138382217
     printlf();
 }

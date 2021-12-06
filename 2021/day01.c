@@ -1,5 +1,5 @@
-// python intcode_cc.py -i math.c string.c 2021/day01.c -o 2021/day01.intc
-// intcode_vm 2021/day01.intc < 2021/input01.txt
+// python intcode_cc.py -i math.c string.c 2021/day01.c -o 2021/day01.txt
+// intcode_vm 2021/day01.txt < 2021/input01.txt
 
 int input[2000];
 

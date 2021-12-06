@@ -1,7 +1,5 @@
-//
-// python intcode_cc.py -i math.c string.c 2021/day03.c -o 2021/day03.intc && intcode_vm 2021/day03.intc < 2021/input03.txt
-//
-
+// python intcode_cc.py -i math.c string.c 2021/day04.c -o 2021/day04.txt
+// intcode_vm 2021/day04.txt < 2021/input04.txt
 
 void check_bingo(int is_bingo, int board, int numbers, int upto) {
     int j;
@@ -134,7 +132,6 @@ void main() {
     upto += 1; // remember to re-draw winning number
     calc_unmarked_sum(&score, &boards[25*B], numbers, upto);
 
-    // 25026 (too high)
-    printd(score*numbers[upto-1]); 
+    printd(score*numbers[upto-1]); // 22704
     printlf();
 }

@@ -78,15 +78,15 @@ This program echo's its input indefinitely until it receives a `0`, after which 
 
 # Code solutions
 
-**IntCode:** [{{ page.basename }}.intc](2021/day01.intc)
-{% capture RAW_INTCODE %} {% include_relative 2021/{{ page.basename }}.intc %} {% endcapture %}
+**IntCode:** [{{ page.basename }}.txt](2021/{{ page.basename }}.txt)
+{% capture RAW_INTCODE %}{% include_relative 2021/{{ page.basename }}.txt %}{% endcapture %}
 
 ```
 {{RAW_INTCODE}}
 ```
 
-**C lite:** [{{ page.basename }}.c](2021/day01.c)
-{% capture RAW_CLITE %} {% include_relative 2021/{{ page.basename }}.c %} {% endcapture %}
+**C lite:** [{{ page.basename }}.c](2021/{{ page.basename }}.c)
+{% capture RAW_CLITE %}{% include_relative 2021/{{ page.basename }}.c %}{% endcapture %}
 
 ```c
 {{RAW_CLITE}}

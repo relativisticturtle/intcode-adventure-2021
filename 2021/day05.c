@@ -1,6 +1,6 @@
-//
-// python intcode_cc.py -i math.c string.c 2021/day05.c -o 2021/day05.intc && intcode_vm 2021/day05.intc < 2021/input05.txt
-//
+// python intcode_cc.py -i math.c string.c 2021/day05.c -o 2021/day05.txt
+// intcode_vm 2021/day05.txt < 2021/input05.txt
+
 int pipes[2000];    // 4*500
 int grid[1000000];  // 1000*1000
 
@@ -74,7 +74,6 @@ void main() {
         }
     }
 
-
     printd(counter); // 7318
     printlf();
 
@@ -122,5 +121,4 @@ void main() {
 
     printd(counter); // 19939
     printlf();
-
 }
