@@ -1,12 +1,16 @@
-# Day 01
+# Day 1
 
 Puzzle: [Sonar Sweep](https://adventofcode.com/2021/day/1)
 
 Solution: [C lite](2021/day01.c), [IntCode](2021/day01.intc)
 
-Fun fact: My IntCode-programs always begin with an "increment relative base" instruction in "immediate mode" (see next section), and for some reason my input started with the number `109`, the *exact* integer code of this particular instruction. It was very surrealistic when I downloaded the input - before reading the problem statement - and staring at what seemed to be an IntCode-program (also: early morning, still not quite awake).
+Fun fact: My IntCode-programs always begin with an "increment relative base" instruction in "immediate mode" (see next section), and by *some random chance(?)* my input started with the number `109`, the *exact* integer code of this particular instruction.
 
-Simple strategy: store all sonar values in a list.
+It was very surrealistic when I downloaded the input - before reading the problem statement, determined to solve the puzzle using IntCode - *and staring at what seemed to be an IntCode-program* (also: early morning, still not quite awake).
+
+&nbsp;
+
+Simple strategy: store all sonar values in a list, then:
 
 - Part 1: Count number of `v[i-1] < v[i]`.
 
@@ -24,7 +28,7 @@ IntCode was invented for, and heavily featured in, the [Advent of Code 2019](htt
 - The integers encode **operations** as sequences of 1 **instruction** followed by 0-3 **parameters**.
 - An **instruction pointer** points to an instruction and executes the operation for the 0-3 parameters,
 - ... and moves to the next operation (excepting jump-instructions when triggered).
-- There's also the **relative base** register ("RB") that affects how the parameters of some operations shall be interpreted as addresses.
+- There's also the **relative base** register ("`RB`") that affects how the parameters of some operations shall be interpreted as addresses.
 
 The instructions are decimal numbers of the form `ABCDE` in which `ABC` sets the *parameter modes* (discussed later), and `DE` is the **op-code** for the instruction as listed here:
 
