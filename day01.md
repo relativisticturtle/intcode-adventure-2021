@@ -18,14 +18,18 @@ The biggest shock was that the IntCode-compiler tool did not crash or reveal new
 
 **Code:**
 
+{% capture RAW_CLITE %}
+{% include_relative 2021/day01.c %}
+{% endcapture %}
+{% capture RAW_INTCODE %}
+{% include_relative 2021/day01.intc %}
+{% endcapture %}
 
 <details>
 <summary>C lite</summary>
 
-```
-{% raw}
-{% include_relative 2021/day01.c %}
-{% endraw %}
+```c
+{{RAW_CLITE}}
 ```
 </details>
 
@@ -33,9 +37,7 @@ The biggest shock was that the IntCode-compiler tool did not crash or reveal new
 <summary>IntCode</summary>
 
 ```
-{% raw}
-{% include_relative 2021/day01.intc %}
-{% endraw %}
+{{RAW_INTCODE}}
 ```
 </details>
 
