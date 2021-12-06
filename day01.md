@@ -1,6 +1,7 @@
 ---
 day: 1
 basename: day01
+title: test
 ---
 # Day {{ page.day }}
 

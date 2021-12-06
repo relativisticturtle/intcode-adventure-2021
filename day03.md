@@ -1,10 +1,10 @@
 ---
-day: 2
-basename: day02
+day: 3
+basename: day03
 ---
 # Day {{ page.day }}
 
-**Puzzle:** [Dive!](https://adventofcode.com/2021/day/{{ page.day }})
+**Puzzle:** [Binary Diagnostic](https://adventofcode.com/2021/day/{{ page.day }})
 
 **Strategy:**
 

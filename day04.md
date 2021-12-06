@@ -1,10 +1,10 @@
 ---
-day: 2
-basename: day02
+day: 4
+basename: day04
 ---
 # Day {{ page.day }}
 
-**Puzzle:** [Dive!](https://adventofcode.com/2021/day/{{ page.day }})
+**Puzzle:** [Giant Squid](https://adventofcode.com/2021/day/{{ page.day }})
 
 **Strategy:**
 
