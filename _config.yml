@@ -4,8 +4,5 @@ plugins:
 relative_links:
   enabled: true
   collections: true
-include:
-  - README.md
-  - prologue.md
-  - day*.md
-  
+title: Advent of IntCode 2021
+description: We're going on an IntCode-adventure!

@@ -1,10 +1,10 @@
 ---
 day: 1
-day00: 01
+basename: day01
 ---
-# Day {page.day}
+# Day {{ page.day }}
 
-**Puzzle:** [Sonar Sweep](https://adventofcode.com/2021/day/{page.day})
+**Puzzle:** [Sonar Sweep](https://adventofcode.com/2021/day/{{ page.day }})
 
 Fun fact: My IntCode-programs always begin with an "increment relative base" instruction in "immediate mode" (see next section), and by *some random chance(?)* my input started with the number `109`, the *exact* integer code of this particular instruction.
 
@@ -78,19 +78,15 @@ This program echo's its input indefinitely until it receives a `0`, after which 
 
 # Code solutions
 
-**IntCode:** [2021/day01.intc](2021/day01.intc)
-{% capture RAW_INTCODE %}
-{% include_relative 2021/day01.intc %}
-{% endcapture %}
+**IntCode:** [{{ page.basename }}.intc](2021/day01.intc)
+{% capture RAW_INTCODE %} {% include_relative 2021/{{ page.basename }}.intc %} {% endcapture %}
 
 ```
 {{RAW_INTCODE}}
 ```
 
-**C lite:** [2021/day01.c](2021/day01.c)
-{% capture RAW_CLITE %}
-{% include_relative 2021/day01.c %}
-{% endcapture %}
+**C lite:** [{{ page.basename }}.c](2021/day01.c)
+{% capture RAW_CLITE %} {% include_relative 2021/{{ page.basename }}.c %} {% endcapture %}
 
 ```c
 {{RAW_CLITE}}
