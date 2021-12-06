@@ -25,21 +25,17 @@ The biggest shock was that the IntCode-compiler tool did not crash or reveal new
 {% include_relative 2021/day01.intc %}
 {% endcapture %}
 
-<details>
-<summary>C lite</summary>
+C lite
 
 ```c
 {{RAW_CLITE}}
 ```
-</details>
 
-<details>
-<summary>IntCode</summary>
+IntCode
 
 ```
 {{RAW_INTCODE}}
 ```
-</details>
 
 &nbsp;
 
