@@ -1,22 +1,45 @@
 # Day 1
 
-Puzzle: [Sonar Sweep](https://adventofcode.com/2021/day/1)
-
-Solution: [C lite](2021/day01.c), [IntCode](2021/day01.intc)
+**Puzzle:** [Sonar Sweep](https://adventofcode.com/2021/day/1)
 
 Fun fact: My IntCode-programs always begin with an "increment relative base" instruction in "immediate mode" (see next section), and by *some random chance(?)* my input started with the number `109`, the *exact* integer code of this particular instruction.
 
 It was very surrealistic when I downloaded the input - before reading the problem statement, determined to solve the puzzle using IntCode - *and staring at what seemed to be an IntCode-program* (also: early morning, still not quite awake).
 
-&nbsp;
+**Strategy:**
 
-Simple strategy: store all sonar values in a list, then:
+Store all sonar values in a list, then:
 
 - Part 1: Count number of `v[i-1] < v[i]`.
 
 - Part 2: Count number of `v[i-3] < v[i]`. 
 
 The biggest shock was that the IntCode-compiler tool did not crash or reveal new bugs - and that I *actually* got the right answers!
+
+**Code:**
+
+
+<details>
+<summary>C lite</summary>
+
+```
+{% raw}
+{% include_relative 2021/day01.c %}
+{% endraw %}
+```
+</details>
+
+<details>
+<summary>IntCode</summary>
+
+```
+{% raw}
+{% include_relative 2021/day01.intc %}
+{% endraw %}
+```
+</details>
+
+&nbsp;
 
 # What is IntCode?
 IntCode was invented for, and heavily featured in, the [Advent of Code 2019](https://adventofcode.com/2019). While IntCode (and many other [esotoric languages](https://esolangs.org/wiki/Esoteric_programming_language)) may be referred to as a *language*, I think that *instruction set* would be a more appropriate term. The "code" consists of a single line of comma-separated integers, like so:
