@@ -19,20 +19,19 @@
   </head>
   <body>
     <div class="wrapper">
-
       <section>
         <div id="title">
           <h1><a href="{{ site.url }}{{ site.baseurl }}">{{ site.title | default: site.github.repository_name }}</a></h1>
           <p>{{ site.description | default: site.github.project_tagline }}</p>
           <hr>
-          <span class="credits left">Project maintained by <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>
-          <span class="credits right">Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/mattgraham">mattgraham</a></span>
+          <span class="credits left">By <a href="{{ site.github.owner_url }}">{{ site.github.owner_name }}</a></span>
+          <span class="credits right">Theme by <a href="https://twitter.com/mattgraham">mattgraham</a></span>
         </div>
-
         {{ content }}
-
+        {% if page.prev Or page.next %}<hr>{% endif %}
+        {% if page.prev %}<p style="text-align: left; width:49%; display: inline-block;"><a href="{{ site.url }}{{ site.baseurl }}/{{ page.prev }}.html">&lt;previous</a></p>{% endif %}
+        {% if page.next %}<p style="text-align: right; width:49%;  display: inline-block;"><a href="{{ site.url }}{{ site.baseurl }}/{{ page.next }}.html">next&gt;</a></p>{% endif %}
       </section>
-
     </div>
   </body>
 </html>

@@ -1,3 +1,8 @@
+---
+title: Prologue
+next: day01
+---
+
 # Prologue - It begins (again)
 
 The space-shuttle hits the water surface with a huge splash and you draw a sigh of relief. Finally! You close your eyes for a moment and reminiscence over the last two years. What an adventure, going on that desperate rescue-mission, all the way to the outer solar system, finding Santa in his stranded spaceship. And how unfortunate that Santa left for Earth, with your hard-earned 50 stars, while you were busy playing [Breakout](https://adventofcode.com/2019/day/13) on your ship’s arcade cabinet. And that the ship became infested by [Erisian bugs](https://adventofcode.com/2019/day/24). And that you lost yourself in the [Plutonian maze](https://adventofcode.com/2019/day/20) while looking for the bathroom. And being put in [Space Jail](https://adventofcode.com/2019/day/11) for exceeding local speed of light limit.

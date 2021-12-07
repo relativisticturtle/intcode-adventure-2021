@@ -1,17 +1,20 @@
 ---
 day: 1
-basename: day01
-title: test
+prev: prologue
+this: day01
+next: day02
+title: Day 1
+puzzle: Sonar Sweep
 ---
-# Day {{ page.day }}
+# {{ page.title }}
 
-**Puzzle:** [Sonar Sweep](https://adventofcode.com/2021/day/{{ page.day }})
+### Puzzle - [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
 
 Fun fact: My IntCode-programs always begin with an "increment relative base" instruction in "immediate mode" (see next section), and by *some random chance(?)* my input started with the number `109`, the *exact* integer code of this particular instruction.
 
 It was very surrealistic when I downloaded the input - before reading the problem statement, determined to solve the puzzle using IntCode - *and staring at what seemed to be an IntCode-program* (also: early morning, still not quite awake).
 
-**Strategy:**
+### Solution
 
 Store all sonar values in a list, then:
 
@@ -19,7 +22,16 @@ Store all sonar values in a list, then:
 
 - Part 2: Count number of `v[i-3] < v[i]`. 
 
+**IntCode:** [{{ page.this }}.txt](2021/{{ page.this }}.txt) &#124; **C lite:** [{{ page.this }}.c](2021/{{ page.this }}.c)
+{% capture RAW_INTCODE %}{% include_relative 2021/{{ page.this }}.txt %}{% endcapture %}
+
+```
+{{RAW_INTCODE}}
+```
+
 The biggest shock was that the IntCode-compiler tool did not crash or reveal new bugs - and that I *actually* got the right answers!
+
+&nbsp;
 
 # What is IntCode?
 IntCode was invented for, and heavily featured in, the [Advent of Code 2019](https://adventofcode.com/2019). While IntCode (and many other [esotoric languages](https://esolangs.org/wiki/Esoteric_programming_language)) may be referred to as a *language*, I think that *instruction set* would be a more appropriate term. The "code" consists of a single line of comma-separated integers, like so:
@@ -74,22 +86,3 @@ We can now decode the IntCode-program stated above:
 ```
 
 This program echo's its input indefinitely until it receives a `0`, after which it halts.
-
-&nbsp;
-
-# Code solutions
-
-**IntCode:** [{{ page.basename }}.txt](2021/{{ page.basename }}.txt)
-{% capture RAW_INTCODE %}{% include_relative 2021/{{ page.basename }}.txt %}{% endcapture %}
-
-```
-{{RAW_INTCODE}}
-```
-
-**C lite:** [{{ page.basename }}.c](2021/{{ page.basename }}.c)
-{% capture RAW_CLITE %}{% include_relative 2021/{{ page.basename }}.c %}{% endcapture %}
-
-```c
-{{RAW_CLITE}}
-```
-

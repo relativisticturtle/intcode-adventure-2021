@@ -1,29 +1,28 @@
 ---
 day: 2
-basename: day02
+prev: day01
+this: day02
+next: day03
+title: Day 2
+puzzle: Dive!
 ---
-# Day {{ page.day }}
+# {{ page.title }}
 
-**Puzzle:** [Dive!](https://adventofcode.com/2021/day/{{ page.day }})
+### Puzzle - [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
 
-**Strategy:**
+xyz...
 
-# TBD
+### Solution
 
+xyz...
 
-# Code solutions
-
-**IntCode:** [{{ page.basename }}.txt](2021/{{ page.basename }}.txt)
-{% capture RAW_INTCODE %}{% include_relative 2021/{{ page.basename }}.txt %}{% endcapture %}
+**IntCode:** [{{ page.this }}.txt](2021/{{ page.this }}.txt) &#124; **C lite:** [{{ page.this }}.c](2021/{{ page.this }}.c)
+{% capture RAW_INTCODE %}{% include_relative 2021/{{ page.this }}.txt %}{% endcapture %}
 
 ```
 {{RAW_INTCODE}}
 ```
 
-**C lite:** [{{ page.basename }}.c](2021/{{ page.basename }}.c)
-{% capture RAW_CLITE %}{% include_relative 2021/{{ page.basename }}.c %}{% endcapture %}
+&nbsp;
 
-```c
-{{RAW_CLITE}}
-```
-
+# TBD

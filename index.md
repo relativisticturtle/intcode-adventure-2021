@@ -1,4 +1,8 @@
-# Welcome to my IntCode-adventure!
+---
+title: Advent of IntCode 2021
+---
+
+# Welcome to Advent of IntCode 2021!
 
 On these pages I shall tell the story of how I solve the [Advent of Code 2021](https://adventofcode.com/2021)-problems with algorithms implemented in IntCode.
 
