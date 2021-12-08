@@ -42,7 +42,12 @@ void scans(int target, int i_max, int delim, int i_read) {
         if((c <= 0) + (c == delim)) {
             break;
         }
-        if((delim == 10) * (c == 13)) {
+        if((delim == 32) * (c == 10)) {
+            // treat lf as a ws
+            break;
+        }
+        if(((delim == 10) + (delim == 32)) * (c == 13)) {
+            // ignore cr when delim is lf or ws
             continue;
         }
         target[i] = c;

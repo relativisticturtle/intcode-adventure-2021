@@ -29,12 +29,6 @@ This is my IntCode-adventure of 2021!
 
 [Day 6](day06.md)
 
+[Day 7](day07.md)
 
-## Background
-The 2019's round of IntCode-problems taught me a lot of how the code I type maps into instructions a CPU would process. Fascinated and curious I asked myself: "Could I generate the IntCode to implement algorithms and solve tasks?".
-
-Against my better judgement I became obsessed with the idea. Realistically, I would not be able to hand-write the IntCode for anything but the most trivial tasks. But if I made a compiler... I have a rough idea of how a compiler may work, but have never undertaken anything such before.  
-
-I began coding, I became more invested in the project, I hit dead-ends, I came up with creative fixes, I came up with unholy fixes ... and I eventually managed to parse code written in the made-up C language-imitation.
-
-And then came Dec 1st.
+[Day 8](day08.md)
