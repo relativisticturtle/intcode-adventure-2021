@@ -12,7 +12,13 @@ int _xp2[60] = {1, 2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096, 8192, 1
 void divmod(int res, int a, int b) {
     res[0] = 0;
     int p;
-    for(p=59; p>=0; p-=1) {
+    // Guard against overflow:
+    //   make sure b*_xp2[p] (see next loop) is < 2^59
+    //   --> b < _xp2[59 - p]
+    for(p=59; (p>=0)*(b > _xp2[59 - p]); p-=1) {
+    }
+    // Now it should be safe to multiply b and _xp2[p]
+    for(; p>=0; p-=1) {
         if(b*_xp2[p] <= a) {
             res[0] += _xp2[p];
             a -= b*_xp2[p];

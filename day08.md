@@ -1,10 +1,10 @@
 ---
-day: 7
-prev: day06
-this: day07
-next: day08
-title: Day 7
-puzzle: The Treachery of Whales
+day: 8
+prev: day07
+this: day08
+next: day09
+title: Day 8
+puzzle: Seven Segment Search
 ---
 # {{ page.title }}
 

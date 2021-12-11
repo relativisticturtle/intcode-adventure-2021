@@ -19,13 +19,13 @@ This is my IntCode-adventure of 2021!
 
 [Day 1 - What is IntCode?](day01.md)
 
-[Day 2](day02.md)
+[Day 2 - Will it assemble?](day02.md)
 
-[Day 3](day03.md)
+[Day 3 - Syntax ahead!](day03.md)
 
-[Day 4](day04.md)
+[Day 4 - Call on me](day04.md)
 
-[Day 5](day05.md)
+[Day 5 - Stack it up](day05.md)
 
 [Day 6](day06.md)
 
