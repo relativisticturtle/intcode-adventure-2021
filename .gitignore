@@ -6,6 +6,7 @@ intcode_vm.exe
 # misc
 *.lnk
 input*.txt
+test.txt
 session.txt
 
 # not yet
