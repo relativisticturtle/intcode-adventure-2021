@@ -77,3 +77,22 @@ void str2int(int s, int out) {
         out[0] = 10*out[0] + s[0] - 48;
     }
 }
+void strcmp(int res, int s1, int s2) {
+    int i;
+    for(i=0; s1[i]*(s1[i]==s2[i]); i+=1) {
+    }
+    res[0] = s2[i] - s1[i];
+}
+void strncmp(int res, int s1, int s2, int i_max) {
+    int i;
+    for(i=0; (i<i_max)*s1[i]*(s1[i]==s2[i]); i+=1) {
+    }
+    res[0] = s2[i] - s1[i];
+}
+void strcpy(int dest, int src) {
+    int i;
+    for(i=0; src[i]; i+=1) {
+        dest[i] = src[i];
+    }
+    dest[i]=0;
+}
