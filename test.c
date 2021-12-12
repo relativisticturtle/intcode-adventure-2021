@@ -8,7 +8,7 @@ int _test_core_comparisons_negative[] = "Comparisons with negative : ";
 int _test_core_expressions[] = "Expressions               : ";
 
 
-void main() {
+void test_core() {
     int a;
     int b[10];
     int res;
@@ -53,7 +53,10 @@ void main() {
         prints(_test_core_FAIL);
     }
     printlf();
+}
 
+void main() {
+    test_core();
     test_math();
     test_sort();
 }

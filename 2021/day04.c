@@ -73,7 +73,6 @@ void main() {
     int l;
 
     // Read numbers
-    int l;
     for(L=0; L<99; L+=1) {
         scans(buffer, 3, 44, &i_read);
         str2int(buffer, &numbers[L]);
