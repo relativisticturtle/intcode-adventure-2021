@@ -4,15 +4,15 @@ title: Advent of IntCode 2021
 
 # Welcome to Advent of IntCode 2021!
 
-On these pages I shall tell the story of how I solve the [Advent of Code 2021](https://adventofcode.com/2021)-problems with algorithms implemented in IntCode.
+Two years in space. Lost. Abandoned. Forgotten. But the Astronaut did not give up.
 
-To this end I prepared a tool, an IntCode-compiler, to generate the IntCode-program from a made-up C language imitation ("C lite"). For me this was a first. I have never coded anything resembling a compiler before. However, from curiosity and general interest in computer science I had a (*very*) vague idea of what one was supposed to do. I challenged myself to write this tool myself because, you know... er... fun? And just in time for this year's round of AoC the pieces came together and I tried it on the day 1 puzzles. Moment of truth. One star. Two stars. It works! It actually works!
+Against all odds, and Erisian bugs, and the space police, the Astronaut has made a heroic return!
 
-So, to be clear:
+Now glory and celebration befitting a hero awaits our adventurer from 2019!
 
-This is *not* a HOWTO on writing quality compilers (or quality code in general...).
+...except in the extremely unlikely case of a [sleigh-key dropping accident](https://adventofcode.com/2021/day/1).
 
-This is my IntCode-adventure of 2021!
+The Astronaut thought he was done with IntCode, but IntCode was not done with him.
 
 ## Adventure
 [Prologue - It begins (again)](prologue.md)
@@ -32,3 +32,25 @@ This is my IntCode-adventure of 2021!
 [Day 7](day07.md)
 
 [Day 8](day08.md)
+
+[Day 9](day09.md)
+
+[Day 10](day10.md)
+
+[Day 11](day11.md)
+
+[Day 12](day12.md)
+
+
+## Background
+On these pages I shall tell the story of how I solve the [Advent of Code 2021](https://adventofcode.com/2021)-problems with algorithms implemented in IntCode.
+
+The larger part of the telling will be on the tool I wrote for the purpose, an IntCode-compiler, if you will. I'll try to describe its design, beginning at a basic level, and advancing to the fully functional tool. I do this in the hope that it may demystify how compilers transform human-readable code to machine-instructions.
+
+I have never coded anything resembling a compiler before. However, from curiosity and general interest in computer science I had a (*very*) vague idea of what one was supposed to do. I challenged myself to write this tool myself because, you know... er... fun? And just in time for this year's round of AoC the pieces came together and I tried it on the day 1 puzzles. Moment of truth. One star. Two stars. It worked! It actually worked!
+
+So, to be clear:
+
+This is *not* a HOWTO on writing quality compilers (or quality code in general...).
+
+This is my IntCode-adventure of 2021!

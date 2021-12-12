@@ -99,7 +99,7 @@ void main() {
     }
 
     // Part 1
-    printd(score);  // 26397
+    printd(score);  // 318081
     printlf();
 
     // Part 2

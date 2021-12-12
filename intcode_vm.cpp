@@ -177,6 +177,10 @@ int main(int argc, const char* argv[]) {
         if (infile.peek() == ',')
             infile.ignore();
     }
+    if(i==0) {
+        std::cout << "Failed to read file " << argv[code_p] << ". Non-existing? Empty?" << std::endl;
+        print_usage_and_exit(argv[0]);
+    }
     if(verbose) {
         std::cout << i << " integers read" << std::endl;
         std::cout << "-------------------------" << std::endl;
