@@ -8,11 +8,19 @@ puzzle: Sonar Sweep
 ---
 # {{ page.title }}
 
-### Puzzle - [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
+### [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
 
-Fun fact: My IntCode-programs always begin with an "increment relative base" instruction in "immediate mode" (see next section), and by *some random chance(?)* my input started with the number `109`, the *exact* integer code of this particular instruction.
+You keep your breath as your hand reach the power switch, hesitate for a moment, and finally flip it to "ON". Thirteenth time's a charm. The machine is humming and occasionally sparking as it executes the boot sequence. The sparking is worrying, but this time no [magic smoke is escaping](https://adventofcode.com/2019/day/2) so that's probably fine...
 
-It was very surrealistic when I downloaded the input - before reading the problem statement, determined to solve the puzzle using IntCode - *and staring at what seemed to be an IntCode-program* (also: early morning, still not quite awake).
+"Hey `I2C2`, how are you feeling?"
+
+*You came back for me. You saved me?*
+
+You are not crazy. Crazy people hear voices and imagine thing's that aren't. This is something else entirely. This is... an enhanced extra-sensory phenomenon. Yes, exactly that. You are *not* crazy.
+
+"I need your help, again. Here's a list of depth values from a sonar sweep..."
+
+&nbsp;
 
 ### Solution
 
@@ -28,8 +36,6 @@ Store all sonar values in a list, then:
 ```
 {{RAW_INTCODE}}
 ```
-
-The biggest shock was that the IntCode-compiler tool did not crash or reveal new bugs - and that I *actually* got the right answers!
 
 &nbsp;
 

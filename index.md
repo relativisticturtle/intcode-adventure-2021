@@ -4,15 +4,15 @@ title: Advent of IntCode 2021
 
 # Welcome to Advent of IntCode 2021!
 
-Two years in space. Lost. Abandoned. Forgotten. But the Astronaut did not give up.
+Two years in space. Lost, abandoned, forgotten... but the Astronaut did *not* give up.
 
-Against all odds, and Erisian bugs, and the space police, the Astronaut has made a heroic return!
+Against all odds (and Erisian bugs (and the space police)), the Astronaut has made a heroic return!
 
 Now glory and celebration befitting a hero awaits our adventurer from 2019!
 
-...except in the extremely unlikely case of a [sleigh-key dropping accident](https://adventofcode.com/2021/day/1).
+...except in the extremely unlikely case of a [sleigh-key dropping accident](https://adventofcode.com/2021/day/1)...
 
-The Astronaut thought he was done with IntCode, but IntCode was not done with him.
+The Astronaut - now Aquanaut - embarks on a new adventure.
 
 ## Adventure
 [Prologue - It begins (again)](prologue.md)
