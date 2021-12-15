@@ -43,11 +43,15 @@ Today's input was marginally harder to process, but not much. Rather than consid
 
 Coding IntCode by hand *can* be done. Let's revisit the Day 1 puzzle and design an IntCode-program that solves the problem. I design the algorithm as a program flow with 3 distinct steps: 
 
-![High-level description of the algorithm solving Day 1's puzzle](/_assets/day2_fig1.png)
+![High-level description of the algorithm solving Day 1's puzzle](/docs/assets/day2_fig1_v2.png)
 
 In the first step all depth values are scanned into a buffer, here called `depth`. In the second step the buffer is iterated through, counting all occurences of *increasing* depths. The third step does the same as the second, except that it checks for an increase against the depth value 3 steps prior.
 
-Breaking down the *first* step further I defined is as such:
+Beginning with the first step, it is now broken down further into low level instructions:
 
-![Scan input -> depth[]](/_assets/day2_fig2.png)
+![Step 1 - "Scan input -> depth[]"](/docs/assets/day2_fig2_v2.png)
+
+Same with the second step:
+
+![Step 2 - "Count occurences of depth[i-1] < depth[i]"](/docs/assets/day2_fig3.png)
 
