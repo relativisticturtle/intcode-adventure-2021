@@ -8,11 +8,11 @@ puzzle: Lanternfish
 ---
 # {{ page.title }}
 
-### Puzzle - [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
+## Puzzle - [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
 
 xyz...
 
-### Solution
+## Solution
 
 xyz...
 
