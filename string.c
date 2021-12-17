@@ -76,6 +76,7 @@ void str2int(int s, int out) {
     for(; (48 <= s[0]) * (s[0] <= 57); s+=1) {
         out[0] = 10*out[0] + s[0] - 48;
     }
+    out[0] *= sign;
 }
 void strcmp(int res, int s1, int s2) {
     int i;

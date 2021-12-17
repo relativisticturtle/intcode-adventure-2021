@@ -42,7 +42,7 @@ Today's input was marginally harder to process, but not much. Rather than consid
 
 Coding IntCode by hand *can* be done. Let's revisit the Day 1 puzzle and code an IntCode-program that solves the problem. I found that flowcharts were of great help when designing the algorithm, so let's do that! First, break down the program on a high level to three steps:
 
-![High-level description of the algorithm solving Day 1's puzzle](/docs/assets/day2_fig1_v2.png)
+![High-level description of the algorithm solving Day 1's puzzle](/assets/day2_fig1_v2.png)
 
 - In the first step all depth values are scanned into a buffer, here called `depth`.
 - In the second step the buffer is iterated through, counting all occurences of *increasing* depths.
@@ -50,7 +50,7 @@ Coding IntCode by hand *can* be done. Let's revisit the Day 1 puzzle and code an
 
 Going into more details on the first step, it is now further broken down into low level instructions:
 
-![Step 1 - "Scan input -> depth[]"](/docs/assets/day2_fig2_v2.png)
+![Step 1 - "Scan input -> depth[]"](/assets/day2_fig2_v2.png)
 
 **Comments**
 - The integer `p` is used as a pointer into the `depth`-buffer.
@@ -59,7 +59,7 @@ Going into more details on the first step, it is now further broken down into lo
 
 For the second step the process is broken down in a similar fashion:
 
-![Step 2 - "Count occurences of depth[i-1] < depth[i]"](/docs/assets/day2_fig3.png)
+![Step 2 - "Count occurences of depth[i-1] < depth[i]"](/assets/day2_fig3.png)
 
 **Comments**
 - `c` is the variable counting occurrences
