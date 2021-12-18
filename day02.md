@@ -48,25 +48,33 @@ Coding IntCode by hand *can* be done. Let's revisit the Day 1 puzzle and code an
 - In the second step the buffer is iterated through, counting all occurences of *increasing* depths.
 - The third step does the same as the second, except that it checks for an increase against the depth value 3 steps prior.
 
-Going into more details on the first step, it is now further broken down into low level instructions:
+These high-level steps are now further broken down into more detailed flow charts with low-level instructions:
+
+## Step 1 - "Scan input -> depth[]"
 
 ![Step 1 - "Scan input -> depth[]"](/assets/day2_fig2_v2.png)
 
-**Comments**
 - The integer `p` is used as a pointer into the `depth`-buffer.
 - "`&depth`" here means the start address of this buffer. (Only "`depth`" would have been more accurate - using C-notation, but I wanted to emphasize that it is an address. Or "`&depth[0]`" would have worked.)
 - The input is assumed to be 2000 in length. That's why it is checked whether the pointer is within this offset at every iteration.
 
 For the second step the process is broken down in a similar fashion:
 
-![Step 2 - "Count occurences of depth[i-1] < depth[i]"](/assets/day2_fig3.png)
+## Step 2 - "Count occurences of depth[i-1] < depth[i]"
 
-**Comments**
+![Step 2 - "Count occurences of depth[i-1] < depth[i]"](/assets/day2_fig3_v2.png)
+
 - `c` is the variable counting occurrences
-- `q` is lagging `p` by one step.
+- `q` is lagging `s` by one step.
 - Borrowing again from C-notation, the asterisk (`*`) means to dereference `p` and `q`, respectively. I.e., take the values in the `depth`-buffer at which each is pointing to.
-- We compare `*p` and `*q` but we don't have to implement any if-block for the comparison. The comparison itself is an operator that stores `0` or `1` into `r`, which we can simply add to the counter `c`.
+- We compare `*q` and `*s` but we don't have to implement any if-block for the comparison. The comparison itself is an operator that stores `0` or `1` into `r`, which we can simply add to the counter `c`.
 
-...and just like that we have written the *assembly code* solving part 1 of the puzzle! Not convinced? You think assembly code should have [cryptic mnemonics](https://en.wikipedia.org/wiki/Assembly_language#Mnemonics) and instructions such as "`MOV EAX, 2Ah`" and "`HCF`". (That's how I usually think of assembly code anyway).
+## Step 3
 
-The important thing here is that every statement for step 1 and 2 in the figures above can be replaced with a single IntCode-instruction. How? *Stay tuned for the continuation on Day 3!*
+Let's wait a little with part 2. Maybe we can do something ~~clever~~ hack'ish...
+
+## What did this achieve?
+
+With this we have more-or-less written the *assembly code* solving part 1 of the puzzle! Not convinced? You think assembly code should have [cryptic mnemonics](https://en.wikipedia.org/wiki/Assembly_language#Mnemonics) and instructions such as "`MOV EAX, 2Ah`" and "`HCF`". (That's how I usually think of assembly code anyway).
+
+The important thing here is that every statement for step 1 and 2 in the flow charts above can be replaced with a single IntCode-instruction. How? *Stay tuned for the continuation on Day 3!*

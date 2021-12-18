@@ -45,7 +45,7 @@ The Astronaut - now Aquanaut - embarks on a new adventure.
 ## Background
 On these pages I shall tell the story of how I solve the [Advent of Code 2021](https://adventofcode.com/2021)-problems with algorithms implemented in IntCode.
 
-The larger part of the telling will be on the tool I wrote for the purpose, an IntCode-compiler, if you will. I'll try to describe its design, beginning at a basic level, and advancing to the fully functional tool. I do this in the hope that it may demystify how compilers transform human-readable code to machine-instructions.
+The larger part of the telling will be on the tool I wrote for the purpose: an IntCode-compiler, if you will. I'll try to describe its design, beginning at a basic level, and advancing to the fully functional tool. I do this in the hope that it may demystify how compilers transform human-readable code to machine-instructions.
 
 I have never coded anything resembling a compiler before. However, from curiosity and general interest in computer science I had a (*very*) vague idea of what one was supposed to do. I challenged myself to write this tool myself because, you know... er... fun? And just in time for this year's round of AoC the pieces came together and I tried it on the day 1 puzzles. Moment of truth. One star. Two stars. It worked! It actually worked!
 

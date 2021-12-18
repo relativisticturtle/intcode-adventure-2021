@@ -10,7 +10,7 @@ puzzle: Sonar Sweep
 
 ### [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
 
-You keep your breath as your hand reach the power switch, hesitate for a moment, and finally flip it to "ON". Thirteenth time's a charm. The machine is humming and occasionally sparking as it executes the boot sequence. The sparking is worrying, but this time no [magic smoke is escaping](https://adventofcode.com/2019/day/2) so that's probably fine...
+You keep your breath as your hand reach the power switch, hesitate for a moment, and finally flip it to "ON". *Thirteenth time's a charm*. The machine is humming and occasionally sparking as it executes the boot sequence. The sparking is worrying, but this time no [magic smoke is escaping](https://adventofcode.com/2019/day/2) so that's probably fine...
 
 "Hey `I2C2`, how are you feeling?"
 
@@ -19,8 +19,6 @@ You keep your breath as your hand reach the power switch, hesitate for a moment,
 You are not crazy. Crazy people hear voices and imagine thing's that aren't. This is something else entirely. This is... an enhanced extra-sensory phenomenon. Yes, exactly that. You are *not* crazy.
 
 "I need your help, again. Here's a list of depth values from a sonar sweep..."
-
-&nbsp;
 
 ### Solution
 

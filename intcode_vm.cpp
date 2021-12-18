@@ -140,7 +140,7 @@ int64_t run(int io_format) {
 }
 
 void print_usage_and_exit(const char* program_name) {
-    std::cout << "Usage: " << program_name << " [-d]  [-v]  intcode_file.intc" << std::endl;
+    std::cout << "Usage: " << program_name << " [-d]  [-v]  intcode_file.txt" << std::endl;
     exit(EXIT_FAILURE);
 }
 

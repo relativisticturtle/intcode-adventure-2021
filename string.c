@@ -73,7 +73,7 @@ void str2int(int s, int out) {
         sign = 1;
     }
     out[0] = 0;
-    for(; (48 <= s[0]) * (s[0] <= 57); s+=1) {
+    for(; (47 < s[0]) * (s[0] < 58); s+=1) {
         out[0] = 10*out[0] + s[0] - 48;
     }
     out[0] *= sign;
