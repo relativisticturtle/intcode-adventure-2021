@@ -42,7 +42,7 @@ Today's input was marginally harder to process, but not much. Rather than consid
 
 Coding IntCode by hand *can* be done. Let's revisit the Day 1 puzzle and code an IntCode-program that solves the problem. I found that flowcharts were of great help when designing the algorithm, so let's do that! First, break down the program on a high level to three steps:
 
-![High-level description of the algorithm solving Day 1's puzzle](/assets/day2_fig1_v2.png)
+![High-level description of the algorithm solving Day 1's puzzle](/assets/flowchart_step123.png)
 
 - In the first step all depth values are scanned into a buffer, here called `depth`.
 - In the second step the buffer is iterated through, counting all occurences of *increasing* depths.
@@ -50,23 +50,22 @@ Coding IntCode by hand *can* be done. Let's revisit the Day 1 puzzle and code an
 
 These high-level steps are now further broken down into more detailed flow charts with low-level instructions:
 
-## Step 1 - "Scan input -> depth[]"
+## Step 1 - "Scan input -> `depth[]`"
 
-![Step 1 - "Scan input -> depth[]"](/assets/day2_fig2_v2.png)
+![Step 1 - "Scan input -> depth[]"](/assets/flowchart_step1.png)
 
-- The integer `p` is used as a pointer into the `depth`-buffer.
-- "`&depth`" here means the start address of this buffer. (Only "`depth`" would have been more accurate - using C-notation, but I wanted to emphasize that it is an address. Or "`&depth[0]`" would have worked.)
+- The integer `p` is used as a pointer (`*`) into the `depth`-buffer.
+- "`&depth`" here means the start address of this buffer. ("`depth`" only would have been more accurate - using C-notation, but I wanted to emphasize that it is an address. Or "`&depth[0]`" would have worked.)
 - The input is assumed to be 2000 in length. That's why it is checked whether the pointer is within this offset at every iteration.
 
 For the second step the process is broken down in a similar fashion:
 
-## Step 2 - "Count occurences of depth[i-1] < depth[i]"
+## Step 2 - "Count occurences of `depth[i] < depth[i+1]`"
 
-![Step 2 - "Count occurences of depth[i-1] < depth[i]"](/assets/day2_fig3_v2.png)
+![Step 2 - "Count occurences of depth[i] < depth[i+1]"](/assets/flowchart_step2.png)
 
 - `c` is the variable counting occurrences
-- `q` is lagging `s` by one step.
-- Borrowing again from C-notation, the asterisk (`*`) means to dereference `p` and `q`, respectively. I.e., take the values in the `depth`-buffer at which each is pointing to.
+- `q` and `s` are used as pointers into the `depth`-buffer. `q` is lagging `s` by one step.
 - We compare `*q` and `*s` but we don't have to implement any if-block for the comparison. The comparison itself is an operator that stores `0` or `1` into `r`, which we can simply add to the counter `c`.
 
 ## Step 3

@@ -129,7 +129,7 @@ Now, is there any way we can fill in the `?` so that the `input`-statement store
 | `*p = input`  | `003, (p)`          |
 | `r = *q < *s` | `00007, (q), (s), &r` |
 
-This works for this particular statement, but does it interfere with anything else? Not really. The other statements do not care *where* `p`, `q` and `s` are stored. Had we needed to dereference any of them at another place this would not have worked. A variable cannot be located at more than 1 place.
+This works for this particular statement, but does it interfere with anything else? Not really. The other statements do not care *where* `p`, `q` and `s` are stored. It's probably not a good practice to mix data and code section in a program, but this time we got away with it because the variables in question were only dereferenced one time each. Had we needed to dereference any of them at another place this would not have worked.
 
 What about the numerical value of the positions? `&p`, `&q` and `&s`? No sweat! Those we get the same way as the jump-locations, by making 2 passes.
 
