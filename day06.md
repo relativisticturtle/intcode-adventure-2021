@@ -8,13 +8,28 @@ puzzle: Lanternfish
 ---
 # {{ page.title }}
 
-## Puzzle - [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
+## [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
 
-xyz...
+You are worried about `I2C2`.
+
+*&#9835; 376194 lanternfishes in the sea, 376194 lanternfishes. &#9835;*
+
+The IntCode-machine hasn't been itself since the crash yesterday.
+
+*&#9835; Take some down and pass'em around, 395985 lanternfishes in the sea! &#9835;*
+
+You have been meaning to track down the bug (*Please don't let it be one of the [Erisian](https://adventofcode.com/2019/day/24)!*), but other things have come in between, like practicing your [space card shuffling technique](https://adventofcode.com/2019/day/22), and stuff...
+
+*&#9835; 477888 lanternfishes in the sea, 477888 lanternfishes. &#9835;*
+
+Maybe you should spare some time to help your friend.
+
+*&#9835; Take some down and pass'em around, 527548 lanternfishes in the sea! &#9835;*
+
 
 ## Solution
 
-xyz...
+Creative problem. Maintaining a list of lanternfishes would have been tricky (and I had a good suspicion of how the problem would expand for part 2), so I implemented the memory-efficient solution directly in part 1.
 
 **IntCode:** [{{ page.this }}.txt](2021/{{ page.this }}.txt) &#124; **C lite:** [{{ page.this }}.c](2021/{{ page.this }}.c)
 {% capture RAW_INTCODE %}{% include_relative 2021/{{ page.this }}.txt %}{% endcapture %}
@@ -25,4 +40,86 @@ xyz...
 
 &nbsp;
 
-# TBD
+# **I**ntC's **n**ot **t**echnically **C**
+
+Formally introducing \*drumroll\*: "**I**ntC's **n**ot **t**echnically **C**"  ("**IntC**" for short).
+
+## Features of IntC
+
+### One data type: `int`
+
+That should be sufficient, don't you think? *True/false value?* That's an `int`. *Character?* `int`! *Pointer?* `int`, `int`, `int`! *Floating point number?* That's... those are forbidden! Shoo!
+
+Declaration of an integer variable `a`:
+
+```c
+int a;
+```
+
+Declaration of an integer array `b` of 10 elements:
+
+```c
+int b[10];
+```
+
+(This allocates 10 integers somewhere and initializes `b` to point to the first element. After that `b` is an `int`, same as any other variable).
+
+In global scope, and global scope *only*, it is allowed to initialize arrays with an integer list or an ASCII-string:
+
+```c
+int fibonacci[] = {1,1,2,3,5,8,13,21,34};
+int message[] = "Hello World!";
+```
+
+In local scope (inside a function definition) this is not allowed. Nor is it allowed to initialize variables in their definition:
+
+```c
+  //  ... inside function definition
+  int x = 42;   // NOT ALLOWED
+  int y[] = {1, 2, 3};  // NOPE!
+  int z;
+  z = 42;       // OK
+```
+
+The ampersand `&` yields the address of a variable. The asterisk `*` is only used for multiplication and cannot be used for dereferencing pointers (as in C). The same thing can be achieved with array dereferncing at index 0: `ptr[0]`. Examples:
+
+```c
+int a;
+int ptr;
+int point[3];
+
+ptr = &a;       // ptr is now the address of a
+ptr[0] = 5;     // a is now 5
+ptr = point;    // ptr is now same as point, the addres to a 3 element array
+ptr[2] = 38;    // the 3rd element in that array is now 38
+```
+
+
+### Functions
+
+May take any number of arguments. Do *not* yield return values. Are defined as such:
+
+```c
+void function(int a, int b, int c) {
+    // function body
+}
+```
+
+Note:
+
+- Must be declared as `void`.
+- The left curly-brace, `{`, must be on the first line.
+- The right curly-brace, `}`, must be alone on its line.
+
+Passing data back from the function can only happen if it writes to a global variable, or if it is passed a pointer. Example:
+
+```c
+void sum(int result, int a, int b) {
+    result[0] = a + b;
+}
+
+int main() {
+    int res;
+    sum(&res, 10, 13);
+}
+```

@@ -49,7 +49,7 @@ You pause. The bingo game has just finished loading on the screens. The squid re
 
 &nbsp;
 
-# IntCoding
+# &#9835; Harder, Better, Faster, Stronger &#9835;
 
 Our IntCode-program from yesterday solved part 1 of Day 1's puzzle, but we should of course solve part 2 with it before we let it go. Once you figure out that taking the difference over a "rolling average of 3 elements" is equivalent to the difference between values *3 positions* apart in the sequence. That's why the high level description of part 1 and part 2 were so similar:
 
@@ -168,6 +168,6 @@ A second pass with all substitutions yields:
 3,100,1001,1,1,1,1007,1,2100,98,1005,98,0,1101,0,0,99,1101,100,0,26,1001,26,1,27,7,0,0,98,1,99,98,99,1001,26,1,26,1007,27,2099,98,1005,98,21,4,99,107,1,23,98,1005,98,45,1101,3,0,23,1105,1,13
 ```
 
-Now down to 60 integers. (Yeah!)
+Now down to 60 integers. (*Yeah!*)
 
 That concludes the handcoding of Day 1's puzzle. Great job!
