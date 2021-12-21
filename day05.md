@@ -74,6 +74,6 @@ To see the benefit of compiler-generated code, let's add another row in this nex
 
 My laptop is reasonably fast. Running 1M IntCode-instructions is made in milliseconds. No problem at all. My memory and hard drive both have a few GB's to spare. The program size negligible.
 
-What is not negligible is the *time* I spend coding. Having a compiler tool for a real language (not assembly) I can harness the power of control logic, function calls, and code reuse - without having to worry about the nitty-gritty details of how everything is carried out by obscure integer operations.
+What is not negligible is the *time* I spend coding. Having a compiler tool for a real language (not assembly) I can harness the power of control structures, function calls, and code reuse - without having to worry about the nitty-gritty details of memory allocation, jump-locations, and how everything is carried out by obscure integer operations.
 
 The reason the hand-coding was feasible for the chosen puzzle was that it was so simple. More complex problem become exponentially more diffucult to implement with this approach. It doesn't scale well at all. A problem that would take 15 min to solve with "generated IntCode" may very well take days to solve if done manually.

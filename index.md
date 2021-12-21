@@ -30,14 +30,10 @@ The ~~Astronaut~~ Aquanaut embarks on a new adventure!
 
 [Day 6 - **I**ntC's **n**ot **t**echnically **C**](day06.md)
 
-[Day 7](day07.md)
 
-[Day 8](day08.md)
+## Resources
 
-[Day 9](day09.md)
-
-[Day 10](day10.md)
-
-[Day 11](day11.md)
-
-[Day 12](day12.md)
+- GitHub-page: [intcode-adventure-2021](https://github.com/relativisticturtle/intcode-adventure-2021)
+- IntCode-VM: [intcode_vm.cpp](intcode_vm.cpp) (should you need one)
+- IntCode-compiler: Coming soon!
+- Advent of Code: [2021](https://adventofcode.com/2021) the puzzles I have been solving, [2019](https://adventofcode.com/2019) *Spaaaaaaaaace!*
