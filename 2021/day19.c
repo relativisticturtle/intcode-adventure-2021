@@ -183,7 +183,7 @@ void main() {
 
     int best_matches;
     s=0;
-    for(; 1;) {
+    for(;;) {
         int z;
         z = s;
         for(s=z+1; (s==z)==0; s+=1) {
