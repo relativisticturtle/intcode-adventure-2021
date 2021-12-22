@@ -204,11 +204,14 @@ An IntCode-program's execution starts at the `main()`-function, of which there m
 ```c
 int message[] = "Hello world!";
 
-void main() {
-    int i;
-    for(i=0; i<12; i+=1) {
-        print(message[i]);
+void prints(int s) {
+    for(; s[0]; s+=1) {
+        print(s[0]);
     }
+}
+
+void main() {
+    prints(message);
     print(10); // Line feed: '\n'
 }
 ```

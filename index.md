@@ -30,6 +30,44 @@ The ~~Astronaut~~ Aquanaut embarks on a new adventure!
 
 [Day 6 - **I**ntC's **n**ot **t**echnically **C**](day06.md)
 
+[Day 7 - Decorating your Syntax tree](day07.md)
+
+[Day 8 - ...with Nodes](day08.md)
+
+[Day 9 - ...and Parsing](day09.md)
+
+[Day 10](day10.md)
+
+[Day 11](day11.md)
+
+[Day 12](day12.md)
+
+[Day 13](day13.md)
+
+[Day 14](day14.md)
+
+[Day 15](day15.md)
+
+[Day 16](day16.md)
+
+[Day 17](day17.md)
+
+[Day 18](day18.md)
+
+[Day 19](day19.md)
+
+[Day 20](day20.md)
+
+[Day 21](day21.md)
+
+[Day 22](day22.md)
+
+[Day 23](day23.md)
+
+[Day 24](day24.md)
+
+[Day 25](day25.md)
+
 
 ## Resources
 
