@@ -62,16 +62,12 @@ The ~~Astronaut~~ Aquanaut embarks on a new adventure!
 
 [Day 22](day22.md)
 
-[Day 23](day23.md)
 
-[Day 24](day24.md)
-
-[Day 25](day25.md)
-
+## IntCode-compiler
+Coming soon!
 
 ## Resources
 
 - GitHub-page: [intcode-adventure-2021](https://github.com/relativisticturtle/intcode-adventure-2021)
 - IntCode-VM: [intcode_vm.cpp](intcode_vm.cpp) (should you need one)
-- IntCode-compiler: Coming soon!
 - Advent of Code: [2021](https://adventofcode.com/2021) the puzzles I have been solving, [2019](https://adventofcode.com/2019) *Spaaaaaaaaace!*
