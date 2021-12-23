@@ -64,7 +64,27 @@ The ~~Astronaut~~ Aquanaut embarks on a new adventure!
 
 
 ## IntCode-compiler
-Coming soon!
+
+Here it is, enjoy! ;)
+
+- [On GitHub](https://github.com/relativisticturtle/intcode-adventure-2021/blob/main/intcode_cc.py)
+
+- [Direct download](intcode_cc.py)
+
+Pure Python 3, no external dependencies.
+
+To compile an [IntC-file](day06.md):
+
+```
+python intcode_cc.py -i <input IntC-file> -o <output IntCode-file>
+```
+
+To compile with many source-files, just list them after the `-i`. Example from day 9:
+
+```
+python intcode_cc.py -i math.c string.c sort.c 2021/day09.c -o 2021/day09.txt
+```
+
 
 ## Resources
 

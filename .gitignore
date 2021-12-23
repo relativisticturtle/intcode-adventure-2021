@@ -8,6 +8,3 @@ intcode_vm.exe
 input*.txt
 test.txt
 session.txt
-
-# not yet
-intcode_cc.py
