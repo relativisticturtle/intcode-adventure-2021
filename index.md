@@ -62,6 +62,12 @@ The ~~Astronaut~~ Aquanaut embarks on a new adventure!
 
 [Day 22](day22.md)
 
+[Day 23](day23.md)
+
+[Day 24](day24.md)
+
+[Day 25](day25.md)
+
 
 ## IntCode-compiler
 
