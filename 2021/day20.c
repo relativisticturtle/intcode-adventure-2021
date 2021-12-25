@@ -95,7 +95,6 @@ void main() {
             break;
         }
     }
-    
 
     // Init buffer
     int x;
@@ -104,14 +103,11 @@ void main() {
         for(x=0; x<W+110; x+=1) {
             if(0<(y<55)+(H+54<y)+(x<55)+(W+54<x)) {
                 buffer[(W+110)*y+x] = 46;
-                //print(88);
             }
             else {
                 buffer[(W+110)*y+x] = imag0[W*(y-55) + (x-55)];
-                //print(imag0[W*(y-5) + (x-5)]);
             }
         }
-        //printlf();
     }
 
     // Part 1
@@ -120,10 +116,8 @@ void main() {
     counter=0;
     for(y=0; y<H+110; y+=1) {
         for(x=0; x<W+110; x+=1) {
-            //print(buffer[(W+10)*y + x]);
             counter += buffer[(W+110)*y + x] == 35;
         }
-        //printlf();
     }
     printd(counter); // 5597
     printlf();
@@ -137,11 +131,9 @@ void main() {
     counter=0;
     for(y=0; y<H+110; y+=1) {
         for(x=0; x<W+110; x+=1) {
-            //print(buffer[(W+10)*y + x]);
             counter += buffer[(W+110)*y + x] == 35;
         }
-        //printlf();
     }
-    printd(counter); // x 5568 too low, 5816 too high
+    printd(counter);
     printlf();
 }
