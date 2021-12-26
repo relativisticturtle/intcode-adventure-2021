@@ -61,7 +61,7 @@ void test_core() {
             break;
         }
     }
-    if(res == 5) {
+    if(a == 5) {
         prints(_test_core_OK);
     }
     else {
