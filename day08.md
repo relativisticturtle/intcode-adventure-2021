@@ -34,58 +34,14 @@ Segments were identified by counting in how many of the 10 digits they appear, a
 
 &nbsp;
 
-# ...with Nodes
+# Decorating your Syntax tree
 
-In my IntCode-compiler design I settled for these nodes:
+The IntC-language we specified yesterday is suitable when writing source code, but for further processing we want to transform the code into a *Syntax tree*. The leaves of this syntax tree will be statements and expressions, and the parent nodes are `if`- statements, `for`-statements, functions, and more.
 
-```
-NodeProgram
-NodeFunction
-NodeScope
-  NodeBlock
-  NodeIfElse
-  NodeFor
-NodeGoto
-NodeAssignment
-NodeVariable
-NodeCall
-NodeExpression
-```
+Here is an illustration of how source code is mapped to a Syntax tree:
 
-### NodeProgram
-Root node of the program. Has a list of functions (`NodeFunction`) and global variables (`NodeVariable`).
+![The Syntax tree of a Hello World-program](assets/syntax_tree.png)
 
-### NodeFunction
-Function-definition: name, parameter list (`NodeVariable`) and function body (`NodeBlock`).
+(Rough diagram. Many details skimmed over.)
 
-### NodeScope
-Abstract class for nodes that have variable-scope. Holds a variable list (`NodeVariable`).
-
-### NodeBlock
-Defines a sequence of statements to execute in order. Statements are `NodeAssignment`, `NodeCall`, `NodeGoto`, `NodeIfElse` or `NodeFor`.
-
-### NodeIfElse
-A condition (`NodeExpression`) and statements (`NodeBlock`) to execute if evaluated zero or non-zero, respectively.
-
-### NodeFor
-A statement (`NodeAssignment` or `NodeCall`) to perform once before. A condition (`NodeExpression`) determining if next iteration is to occur. And a statement (`NodeAssignment` or `NodeCall`) to perform after every iteration. In each iteration a sequence of statements (`NodeBlock`) is executed.
-
-### NodeGoto
-Used for `return`, `continue` and statements. `return` jumps to function-exit. `continue` and `break` jumps to the *current* `for`-loop's next iteration and exit, respectively.
-
-### NodeAssignment
-An expression (`NodeExpression`) to be evaluated and a target (`NodeExpression`) to put the result. (The target is most commonly a variable or an array expression).
-
-### NodeVariable
-Name and scope (global or local).
-
-### NodeCall
-Name of function to call and a list of arguments (`NodeExpression`).
-
-### NodeExpression
-A text-string of the expression.
-
-
-
-
-
+A *good* compiler typically does a series of pre-processing steps, tokenization, and other clever manipulations before generating the syntax tree (unlike my mess of an IntCode-compiler ...).

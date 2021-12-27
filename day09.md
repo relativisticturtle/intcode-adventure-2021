@@ -38,20 +38,53 @@ Part 1: Find all low points. Part 2: BFS-search at each to determine area.
 
 &nbsp;
 
-# ...and Parsing
+# ...with Nodes
 
-I think this is the part where my IntC-to-IntCode compiler is the most lacking. My parsing-routines are not beautiful, but here they are:
+In my IntCode-compiler design I settled for these nodes:
 
-```python
-parse_statement(text, code, row)
-read_variable_definition(code, row, is_global=False)
-read_forloop(code, row)
-read_ifelse(code, row)
-read_block(code, row)
-read_function(code, row)
-read_file(input_file)
+```
+NodeProgram
+NodeFunction
+NodeScope
+  NodeBlock
+  NodeIfElse
+  NodeFor
+NodeGoto
+NodeAssignment
+NodeVariable
+NodeCall
+NodeExpression
 ```
 
-Of the common parameters, `code` is a list of lines making up the source text in a file and `row` is the current line that is to be parsed. Parsing starts at `read_file` and proceeds with recursive calls to these routines, generating the syntax tree. The logic to identify and discriminate between, e.g., a function call from an assignment or an `if`-statement is sloppy, to say the least. This is one reason why IntC is very rigid in its syntax.
+### NodeProgram
+Root node of the program. Has a list of functions (`NodeFunction`) and global variables (`NodeVariable`).
 
-A better, more robust approach would have been using a [grammar](https://en.wikipedia.org/wiki/Context-free_grammar). While I knew about that possibility, I was not confident I could implement one of my own (and I wanted this to be my own creation, not relying on external libraries or copy&pasted code - even at the cost of sloppiness).
+### NodeFunction
+Function-definition: name, parameter list (`NodeVariable`) and function body (`NodeBlock`).
+
+### NodeScope
+Abstract class for nodes that have variable-scope. Holds a variable list (`NodeVariable`).
+
+### NodeBlock
+Defines a sequence of statements to execute in order. Statements are `NodeAssignment`, `NodeCall`, `NodeGoto`, `NodeIfElse` or `NodeFor`.
+
+### NodeIfElse
+A condition (`NodeExpression`) and statements (`NodeBlock`) to execute if evaluated zero or non-zero, respectively.
+
+### NodeFor
+A statement (`NodeAssignment` or `NodeCall`) to perform once before. A condition (`NodeExpression`) determining if next iteration is to occur. And a statement (`NodeAssignment` or `NodeCall`) to perform after every iteration. In each iteration a sequence of statements (`NodeBlock`) is executed.
+
+### NodeGoto
+Used for `return`, `continue` and statements. `return` jumps to function-exit. `continue` and `break` jumps to the *current* `for`-loop's next iteration and exit, respectively.
+
+### NodeAssignment
+An expression (`NodeExpression`) to be evaluated and a target (`NodeExpression`) to put the result. (The target is most commonly a variable or an array expression).
+
+### NodeVariable
+Name and scope (global or local).
+
+### NodeCall
+Name of function to call and a list of arguments (`NodeExpression`).
+
+### NodeExpression
+A text-string of the expression.

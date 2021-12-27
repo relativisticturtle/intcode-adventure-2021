@@ -1000,6 +1000,7 @@ def main():
     if args.output is not None:
         with open(args.output, 'w') as f:
             f.write(','.join(['%d' % c for c in intcode]))
+            f.write('\n')
 
 
 if __name__ == '__main__':

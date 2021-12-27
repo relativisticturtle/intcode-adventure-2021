@@ -49,125 +49,184 @@ You pause. The bingo game has just finished loading on the screens. The squid re
 
 &nbsp;
 
-# &#9835; Harder, Better, Faster, Stronger &#9835;
+# Will it assemble?
 
-Our IntCode-program from yesterday solved part 1 of Day 1's puzzle, but we should of course solve part 2 with it before we let it go. Once you figure out that taking the difference over a "rolling average of 3 elements" is equivalent to the difference between values *3 positions* apart in the sequence. That's why the high level description of part 1 and part 2 were so similar:
+*Continuation from Day 3*. Yesterday I said that we had already (more-or-less) written the assembly-code for solving part 1 of Day 1's puzzle. By "assembly-code" I here take as definition that every statement in the code occupies a single line and maps to a *single* IntCode-instruction.
 
-![High-level description of the algorithm solving Day 1's puzzle](/assets/flowchart_step123.png)
+Here's what we have so far, transcribed from the flowcharts:
 
-...and in the detailed break down of part 1 and 2 we only need to make teeny-tiny change to the flow chart to get our part 2 solver.
+```
+p = &depth
+*p = input      <-------,
+p = p + 1               |
+r = p < &depth + 2000   |
+if r jump  -------------'
+c = 0
+q = &depth
+s = q + 1       <-------,
+r = *q < *s             |
+c = c + r               |
+q = q + 1               |
+r = s < &depth + 1999   |
+if r jump  -------------'
+print c
+halt
+```
 
-![Step 2 - "Count occurences of depth[i] < depth[i+1]"](/assets/flowchart_step2.png)
-![Step 2 - "Count occurences of depth[i] < depth[i+3]"](/assets/flowchart_step3.png)
+## Variables and variable-locations
+The code has a few variables: `p`, `q`, `r`, `s` and `c`. For each of those variables we choose a memory location that doesn't overlap with the code. Let's assume we can fit all code within the first 95 integers, then we can choose locations `95` - `99` for those five variables, respectively.
 
-So modifying our existing code and have one IntCode-program for part 1 and another for part 2 is easy. They will only differ at a single point (*Which? Left as exercise to the reader!*).
+To refer to the memory location of a variable I use the ampersand `&`. (As briefly mentioned yesterday, this is notation borrowed from C-language). So here `&p`, `&q`, `&r`, `&s` and `&c` would simply be substituted for `95`, `96`, `97`, `98` and `99` when the code is assembled to IntCode.
 
-## Single program part 1 and 2 solver
-If you want instead to have the part 1 and part 2 solver in a single program, running the *entire* sequence of the high level description and printing both puzzle answers in a single go, there's one complication. Remember from yesterday: Our hack to perform pointer dereferencing *only* works if the pointer is dereferenced at most at a *single location*. Now check the flow charts above. Yes, we are using both `*q` and `*s` twice, once each in part 1, and once each in part 2. There's an easy fix for that though: More variables! Let's introduce `u` and `v` and use them instead of `q` and `s`, respectively, for part 2.
+What about the `depth`-buffer? We use the buffer `depth` and have to choose a position (or range) in the memory it should occupy. Let's choose all positions from `100` up to (not including) `2100`. This does not overlap with the code (we assume) or the previous variable locations, and a length of 2000 positions was chosen because that's how many integers we needed for the puzzle-input. Good, we can now substitute `&depth` and `&depth + 2000` with `100` and `2100`, respectively, when assembling. That's all we need to do with regards to `depth` in this code. It never occurs without the `&`. It is never used as a variable in itself.
 
-The code to add for part 2 (after first pass, and moving `halt` to the end) will then become:
+## Pointers and dereferencing
+Dereferencing is indicated by an asterisk `*` (C-notation, again). To dereference means to take the value at which a variable is *pointing*. Variables that are used to point at stuff are called *pointers* (duh!). The dereferencing operator `*` is more-or-less the opposite of the location-of operator `&`.
+
+**Example:** In our code above `p` was designated the memory location `95`. If the value of `p` (the integer at position `95`) would have value `234`, then `*p` means "the value at position `234`". If we would increment `p` by 1 `*p` would then become "the value at position `235`. (The value of `&p`, on the other hand, always remains `95`).
+
+## How to generate the IntCode for each statement
+
+Here are examples of how to implement various assembly-statements with IntCode:
+
+| Type        | Example       | IntCode | Comment |
+| ----------- | ------------- | ------------------- | ------- |
+| Assignment  | `p = 541`     | `01101, 541, 0, &p` | Use addition-operation to store result of 541 + 0 to location of `p`.|
+|             | `p = q`       | `01001, &q, 0, &p`  | Same, but use location of `q` in *position*-mode.|
+| Addition    | `p = 541 + 5` | `01101, 541, 5, &p` | Same as assignment but with a non-zero second parameter.|
+|             | `p = q + 5`   | `01001, &q, 5, &p`  | |
+|             | `p = q + r`   | `00001, &q, &r, &p` | |
+| Subtraction | `p = 541 - 5` | `01101, 541, -5, &p`| Addition, but with a negative constant.|
+|             | `p = q - 5`   | `01001, &q, -5, &p` | |
+| Input       | `p = input`   | `00003, &p`         | Scan an integer into `p`. |
+| Print       | `print 35`    | `00104, 35`         | Print the number 46 (ASCII for `#`). |
+|             | `print p`     | `00004, &p`         | Print value of `p`. |
+| Conditional jump | `if r jump 10`| `1005, &r, 10` | `r` is most commonly the result of evaluating a condition. |
+| Unconditional jump | `if 1 jump 10`| `1105, 1, 10` | |
+
+The other *binary* operations of IntCode (`*`, `<`, `==`) are similar to Addition in the table above. For now we take care to avoid missing operators ("subtraction by non-constant", `!=`, `>`, `<=`, `>=`, ... ).
+
+## Jump-locations
+Normally (sadly?) I don't code jump-locations with ASCII-art. We should change the arrows to the numerical value of the jump location. Do we know what they will be? Yes, we do. The premise of this exercise was that we had used code in which every statement can be codified to exactly one IntCode-instruction. The IntCode-instructions may be of length 1 - 4 integers, but we know which for each instruction.
+
+**First pass:** Lay out the IntCode-instructions from beginning to end. Put place-holders for the jump-instructions' targets, while recording where all locations of the jump-targets end up.
+
+**Second pass:** Replace the place-holders by the recorded target-locations.
+
+## Hurdles
+
+So we have kind-of invented a limited assembly-language. A few things to note:
+
+### There is no instruction for subtracting by a non-constant
+
+This is annoying, but we can work around it by squeezing in an extra multiply-by-minus-one instruction somewhere when needed.
+
+### No operation can dereference a pointer (i.e., take the value of `*p`)
+
+Ouch! The `input`-operation cannot target `*p`. The comparison `r = *q < *s` is not supported. This *is* a problem. (Why did we even go through all the hassle of introducing dereferencing to begin with?!)
+
+### We are not making use of the *relative* parameter mode.
+
+We are not setting the *relative base* (`RB`), nor using it ("relative parameter mode"). *Maybe* it could be used to dereference pointers? Probably... (maybe), but let's stay away from it - for now.
+
+## Time to cheat!
+The pointer dereference occurs once for `p`, `q` and `s` each in the statments "`*p = input`" and "`r = *q < *s`". The IntCode we *would* like to produce for this statement is something like:
+
+| Statement     | IntCode           |
+| ------------- | ----------------- |
+| `*p = input`  | `003, ?`          |
+| `r = *q < *s` | `00007, ?, ?, &r` |
+
+Because:
+
+- It's clear that the op-codes need to be `03` (for `input`) and `07` (for `<`).
+- Parameter-mode can only be `0` (for "position mode"). The "immediate parameter mode" would be invalid (for `*p = input`) or just not be of any help (for `r = *q < *s`).
+
+Now, is there any way we can fill in the `?` so that the `input`-statement stores its value at where `p` is pointing? And likewise for the comparison, so that it is made for the values at which `q` and `s` are pointing?
+
+...*and yes, can you believe it, there is one way!* We store `p`, `q` and `s` inside the IntCode-instructions, at the locations of the `?`s. Up to now I have said that all variables, `p`, `q` and `s` included, must be located *after* the code section. Previously `p`, `q` and `s` were located at positions `95` - `97`, but now we put them *inside* the code section at said comparison-statement's first and second parameter:
+
+| Statement     | IntCode           |
+| ------------- | ----------------- |
+| `*p = input`  | `003, (p)`          |
+| `r = *q < *s` | `00007, (q), (s), &r` |
+
+This works for this particular statement, but does it interfere with anything else? Not really. The other statements do not care *where* `p`, `q` and `s` are stored. It's probably not a good practice to mix data and code section in a program, but this time we got away with it because the variables in question were only dereferenced one time each. Had we needed to dereference any of them at another place this would not have worked.
+
+What about the numerical value of the positions? `&p`, `&q` and `&s`? No sweat! Those we get the same way as the jump-locations, by making 2 passes.
+
+## The IntCode (at last!)
+
+### First pass
 
 ```
 Position    Statement               IntCode
 ---------------------------------------------------------------
-    ...
-    50      c = 0                   1101,  0,  0,  &c,
-    54      u = &depth              1101,  &depth,  0,  &u,
-    58      v = u + 3               1001 (<C>),  &u,  3,  &v,
-    62      r = *u < *v             7,  0 (u),  0 (v),  &r,
-    66      c = c + r               1,  &c,  &r,  &c,
-    70      u = u + 1               1001,  &u,  1,  &u,
-    74      r = v < &depth + 1999   1007,  &v,  &depth + 1999,  &r,
-    78      if r jump <C>           1005,  &r, <C>,
-    81      print c                 4,  &c,
-    83      halt                    99
+    00      p = &depth              1101,  &depth,  0,  &p,
+    04      *p = input              3 (<A>),  0 (p),
+    06      p = p + 1               1001,  &p,  1,  &p,
+    10      r = p < &depth + 2000   1007,  &p,  &depth + 2000,  &r,
+    14      if r jump <A>           1005,  &r,  <A>,
+    17      c = 0                   1101,  0,  0,  &c,
+    21      q = &depth              1101,  &depth,  0,  &q,
+    25      s = q + 1               1001 (<B>),  &q,  1,  &s,
+    29      r = *q < *s             7,  0 (q),  0 (s),  &r,
+    33      c = c + r               1,  &c,  &r,  &c,
+    37      q = q + 1               1001,  &q,  1,  &q,
+    41      r = s < &depth + 1999   1007,  &s,  &depth + 1999,  &r,
+    45      if r jump <B>           1005,  &r, <B>,
+    48      print c                 4,  &c,
+    50      halt                    99
 
 
 Position    Variable- or jump-location
 -------------------------------------
-    ...
-    58      <C>
-    63      &u
-    64      &v
-    ...
-```
-
-```
-1101,100,0,5,3,0,1001,5,1,5,1007,5,2100,98,1005,98,4,1101,0,0,99,1101,100,0,30,1001,30,1,31,7,0,0,98,1,99,98,99,1001,30,1,30,1007,31,2099,98,1005,98,25,4,99,1101,0,0,99,1101,100,0,63,1001,63,3,64,7,0,0,98,1,99,98,99,1001,63,1,63,1007,64,2099,98,1005,98,58,4,99,99
-```
-
-## Golfing
-Our current program is 84 integers long. Quite good! We guessed we could write the code with less than 95 integers yesterday and we succeeded with a small margin of 11 integers. (Had we exceeded our initial guess we would just have to reassign `r`, `c` and `depth[]` to higher positions).
-
-Now, let's try to optimize for shorter code (golfing).
-
-### Item 1 - Code reuse
-
-We are basically solving part 1 and part 2 of the puzzle with the same algorithm. Can it be reused? We need the following to happen after part 1:
-
-1. If second iteration, `halt`
-2. Modify "`s = q + 1`" into "`s = q + 3`" (at position `<B> + 2`)
-3. Jump to "`c = 0`" (at position `<B> - 8`)
-
-
-### Item 2 - Skip unnecessary initialization
-
-Since `p` is now living in the code section we can omit `p = &depth` and set it directly. While `c = 0` is superfluous in the *first* iteration (by specification all IntCode beyond the code section should be zero-initialized), we do need to reset it for the *second* iteration.
-
-### Item 3 - Making use of accidental halt-instructions
-
-Every reference to the variable `c` generates a `99` in the IntCode-program, and from **Item 1** above we know we would like to jump to some `halt` instruction - of number `99`. No need to put more of them in the code!
-
-### The new part 2
-
-This is the new part 2, piggybacking on part 1:
-
-![Step 2 - "Count occurences of depth[i] < depth[i+3]"](/assets/flowchart_step3_golf.png)
-
-(Excuse my notation for code position relative point `<B>` in the code).
-
-Implementing this change as well as **Item 2** and **3** gives us:
-
-```
-Position    Statement               IntCode
----------------------------------------------------------------
-    00      *p = input              3 (<A>),  100 (p),
-    02      p = p + 1               1001,  &p,  1,  &p,
-    06      r = p < &depth + 2000   1007,  &p,  &depth + 2000,  &r,
-    10      if r jump <A>           1005,  &r,  <A>,
-    13      c = 0                   1101,  0,  0,  &c,
-    17      q = &depth              1101,  &depth,  0,  &q,
-    21      s = q + 1               1001 (<B>),  &q,  1,  &s,
-    25      r = *q < *s                7,  0 (q),  0 (s),  &r,
-    29      c = c + r                  1,  &c,  &r,  &c,
-    33      q = q + 1               1001,  &q,  1,  &q,
-    37      r = s < &depth + 1999   1007,  &s,  &depth + 1999,  &r,
-    41      if r jump <B>           1005,  &r, <B>,
-    44      print c                     4, &c,
-    46      r = 1 < (<B> + 2)        107,   1, <B> + 2, &r,
-    50      if r jump <halt>        1005,  &r, <halt>,
-    53      (<B> + 2) = 3           1101,   3,  0, <B> + 2,
-    57      jump <B> - 8            1105,   1,  <B> - 8
-
-
-Position    Variable- or jump-location
--------------------------------------
-    00      <A>
-    01      &p
-    21      <B>
-    26      &q
-    27      &s
+    04      <A>
+    05      &p
+    25      <B>
+    30      &q
+    31      &s
     98      &r
     99      &c
    100      &depth
 ```
 
-A second pass with all substitutions yields:
+### Second pass
+```
+Position    Statement           IntCode
+-------------------------------------------------------
+    00      p = 100             1101,  100,    0,    5,
+    04      *p = input             3,    0,
+    06      p = p + 1           1001,    5,    1,    5,
+    10      r = p < 2100        1007,    5, 2100,   98,
+    14      if r jump 04        1005,   98,    4,
+    17      c = 0               1101,    0,    0,   99,
+    21      q = 100             1101,  100,    0,   30,
+    25      s = q + 1           1001,   30,    1,   31,
+    29      r = *q < *s            7,    0,    0,   98,
+    33      c = c + r              1,   99,   98,   99,
+    37      q = q + 1           1001,   30,    1,   30,
+    41      r = s < 2099        1007,   31, 2099,   98,
+    45      if r jump 25        1005,   98,   25,
+    48      print c                4,   99,
+    50      halt                  99
+```
+
+### Final output
+```
+1101,100,0,5,3,0,1001,5,1,5,1007,5,2100,98,1005,98,4,1101,0,0,99,1101,100,0,30,1001,30,1,31,7,0,0,98,1,99,98,99,1001,30,1,30,1007,31,2099,98,1005,98,25,4,99,99
+```
+Please try this IntCode-program on your input from the [2021 Day 1 puzzle](https://adventofcode.com/2021/day/1). It should solve part 1 of the puzzle.
+
+## Running the IntCode
+As discussed on a [day 2](day02.md), you need an IntCode VM. If you have our own, great! Let's put it to some use :). If not, don't worry, I have you covered. The [day 2-page](day02.md) has a C++ implementation with instructions on how to build and use.
+
+**Note 1:** The IntCode-program we constructed here reads and writes direct integers ("decimal", non-ASCII mode). This is different from the other IntCode puzzle solutions I have uploaded here. They read and write ASCII-encoded strings. While this makes the programs more flexible and capable with respect to puzzle-input format, and more, the code to process the ASCII-strings would be many times the current program in size. Therefore, when running the program through the IntCode VM, make sure it does *NOT* operate in ASCII-mode.
+
+With the provided IntCode VM (above) this is achieved by supplying the `-d` flag when running:
 
 ```
-3,100,1001,1,1,1,1007,1,2100,98,1005,98,0,1101,0,0,99,1101,100,0,26,1001,26,1,27,7,0,0,98,1,99,98,99,1001,26,1,26,1007,27,2099,98,1005,98,21,4,99,107,1,23,98,1005,98,45,1101,3,0,23,1105,1,13
+intcode_vm -d day01_manually.txt < input01.txt
 ```
 
-Now down to 60 integers. (*Yeah!*)
-
-That concludes the handcoding of Day 1's puzzle. Great job!
+**Note 2:** Remember that we have hardcoded the input size from the sonar sweep to 2000 values. The program will not be accurate for other sizes.

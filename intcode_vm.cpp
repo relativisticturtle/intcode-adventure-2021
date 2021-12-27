@@ -6,6 +6,7 @@
 #include <cstring>
 #include <iostream>
 #include <fstream>
+#include <sstream>
 
 
 #define MAX_SIZE 100000000
@@ -162,24 +163,44 @@ int main(int argc, const char* argv[]) {
             print_usage_and_exit(argv[0]);
         }
     }
-    if(code_p == 0) {
-        print_usage_and_exit(argv[0]);
+
+    // Zero-set program-memory
+    std::memset(code, 0, sizeof code);
+
+    // IntCode from file or stdin?
+    std::ifstream infile;
+    std::istringstream firstline;
+    if(0 < code_p) {
+        infile.open(argv[code_p]);
+        if(!infile) {
+            std::cout << "Failed to read file " << argv[code_p] << "." << std::endl;
+            print_usage_and_exit(argv[0]);
+        }
     }
+    else {
+        std::string line;
+        std::getline(std::cin, line);
+        firstline.str(line);
+    }
+    std::istream& program_stream = infile.is_open() ? static_cast<std::istream&>(infile) : firstline;
 
     //
-    // Read data file
+    // Read the IntCode
     //
-    std::memset(code, 0, sizeof code);
-    std::ifstream infile(argv[code_p]);
     int i;
-    for(i=0; i<MAX_SIZE && !infile.eof() && infile.good();) {
-        infile >> code[i++];
-        if (infile.peek() == ',')
-            infile.ignore();
-    }
-    if(i==0) {
-        std::cout << "Failed to read file " << argv[code_p] << ". Non-existing? Empty?" << std::endl;
-        print_usage_and_exit(argv[0]);
+    for(i=0; program_stream && i<MAX_SIZE; i++) {
+        // Discard whitespaces, read up to comma, attempt parse as integer
+        char buffer[20];
+        program_stream >> std::skipws;
+        program_stream.getline(buffer, 20, ',');
+        if(!(std::stringstream(buffer) >> code[i])) {
+            // Failed to parse as integer.
+            // Break, but first check if non-ASCII flag:
+            if(buffer[0] == 'D') {
+                io_format = 0;
+            }
+            break;
+        }
     }
     if(verbose) {
         std::cout << i << " integers read" << std::endl;

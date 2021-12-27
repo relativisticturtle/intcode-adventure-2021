@@ -20,25 +20,25 @@ The ~~Astronaut~~ Aquanaut embarks on a new adventure!
 
 [Day 1 - What is IntCode?](day01.md)
 
-[Day 2 - Handcoding an IntCode-program](day02.md)
+[Day 2 - The IntCode VM](day02.md)
 
-[Day 3 - Will it assemble?](day03.md)
+[Day 3 - Handcoding an IntCode-program](day03.md)
 
-[Day 4 - &#9835; Harder, Better, Faster, Stronger &#9835;](day04.md)
+[Day 4 - Will it assemble?](day04.md)
 
-[Day 5 - Reflections on the hand-coding](day05.md)
+[Day 5 - &#9835; Harder, Better, Faster, Stronger &#9835;](day05.md)
 
-[Day 6 - **I**ntC's **n**ot **t**echnically **C**](day06.md)
+[Day 6 - Reflections on the hand-coding](day06.md)
 
-[Day 7 - Decorating your Syntax tree](day07.md)
+[Day 7 - **I**ntC's **n**ot **t**echnically **C**](day07.md)
 
-[Day 8 - ...with Nodes](day08.md)
+[Day 8 - Decorating your Syntax tree](day08.md)
 
-[Day 9 - ...and Parsing](day09.md)
+[Day 9 - ...with Nodes](day09.md)
 
-[Day 10](day10.md)
+[Day 10 - ...and Parsing](day10.md)
 
-[Day 11](day11.md)
+[Day 11 - Memory layout](day11.md)
 
 [Day 12](day12.md)
 
@@ -79,7 +79,7 @@ Here it is, enjoy! ;)
 
 Pure Python 3, no external dependencies.
 
-To compile an [IntC-file](day06.md):
+To compile an [IntC-file](day07.md):
 
 ```
 python intcode_cc.py -i <input IntC-file> -o <output IntCode-file>

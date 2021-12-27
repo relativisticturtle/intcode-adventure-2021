@@ -83,44 +83,67 @@ This is useful for, e.g., my [golfed day 1 solution](2021/day01_golf.txt). The s
 For reference, consider again my [golfed day 1 solution](2021/day01_golf.txt):
 
 ```
-$ intcode_vm -d 2021\day01_golf.txt < 2021\input01.txt
+> type 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v                
+60 integers read
+-------------------------
 1448
 1471
+-------------------------
+done! 31989 instructions executed.
 ```
 
 - This was the correct answers for my puzzle-input.
-- The IntCode-program executed 31989 instructions to complete the puzzle.
 
-Running the same program, with the `D`-switch and my puzzle-input concatenated ([day01_golf_input01.txt](2021/day01_golf_input01.txt)):
+Running the same program through a layer of (IntCode-) IntCode VM:
 
 ```
-$ intcode_vm intcode_vm.txt < 2021\day01_golf_input01.txt
+> type intcode_vm.txt 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v
+8033 integers read
+-------------------------
 1448
 1471
+-------------------------
+done! 266756368 instructions executed.
 ```
 
-Yes!
-
-- Still the right answers!
+- Yes! Still the right answers!
 - 269454756 instructions executed in approx 6 s.
 - So, an average of 269454756 / 31989 = 8423.35 instructions in the IntCode VM to process 1 instruction in the IntCode program.
 
 
-Once, more - right? 
+Once, more - right? *right?!* Let's run with one more layer of IntCode VMs:
 
 ```
-$ intcode_vm intcode_vm.txt < 2021\intcode_vm_day01_golf_input01.txt
+> type intcode_vm.txt intcode_vm.txt 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v
+8033 integers read
+-------------------------
 Illegal access: code[1008067+0]
 ```
 
 Oops! Memory access error... Why? Ah, of course! To put it simply: We have attempted to put one of two *equally sized* boxes inside the other. This implementation of the IntCode VM statically allocates a buffer of 1M integers for the code, but it cannot put a program of its own size in there.
 
-What to do? Give up? *No!* If we could only make `code[]`, the buffer holding the IntCode-program, start beyond all [code-sections, global & local memory-sections, and stack-sections](day10.md)... Hmm... Can't we just declare it as such? The actual code and global memory occupies, let's see..., 8100 integers. Let's hardcode the `code`-pointer to point at memory location 10000, leaving some room for local variables and stack operations. It'll probably be fine!
+What to do? Give up? *No!* If we could only make `code[]`, the buffer holding the IntCode-program, start beyond all [code-sections, global & local memory-sections, and stack-sections](day11.md)... Hmm... The reason it is not already is because of the compiler design, but it can be circumvented. We simply hard-code the `code`-pointer to a memory address at 10000 (should be sufficient) without ever declaring it as an array of any sort. Modern compilers would probably complain. Mine? Not so much.
 
 Second attempt, go!
 
 ```
-$ intcode_vm intcode_vm.txt < 2021\intcode_vm_day01_golf_input01.txt
+> type intcode_vm.txt intcode_vm.txt 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v
+8033 integers read
+-------------------------
 ```
 
 Waiting... No errors. No results either. Still waiting... Can I estimate how long this will take? Let's see. Probably same 8423.35-ratio of IntCode VM instructions to IntCode-program instructions. So 14 hours... Well, it's within 1 day at least ;).
+
+*Update, ~12 hrs later:*
+
+```
+1448
+1471
+-------------------------
+done! 2273420655766 instructions executed.
+```
+
+*Success! Still the correct answer!*
+
+## Closing words
+That was fun ;). At most I ran a stack of 3 IntCode-machines, 1 implemented in C++ and 2 implemented in IntCode, to run an IntCode-program solving the Day 1 puzzle.

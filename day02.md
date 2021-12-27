@@ -38,42 +38,92 @@ Today's input was marginally harder to process, but not much. Rather than consid
 
 &nbsp;
 
-# Handcoding an IntCode-program
+# The IntCode VM
 
-Coding IntCode by hand *can* be done. Let's revisit the Day 1 puzzle and code an IntCode-program that solves the problem. I found that flowcharts were of great help when designing the algorithm, so let's do that! First, break down the program on a high level to three steps:
+To my knowledge there are no CPU-architecture that runs IntCode natively. To run an IntCode-program one needs an IntCode Virtual Machine - "IntCode VM" for short. This is completely analogous to Java bytecode and the JVM.
 
-![High-level description of the algorithm solving Day 1's puzzle](/assets/flowchart_step123.png)
+Participants in Advent of Code 2019 where tasked with successively building an IntCode VM to solve many of the puzzles. There should therefore be plenty of implementations of this virtual machine spread out in cyberspace. IntCode may very well win the category of "language with highest number of interpreters"(?).
 
-- In the first step all depth values are scanned into a buffer, here called `depth`.
-- In the second step the buffer is iterated through, counting all occurences of *increasing* depths.
-- The third step does the same as the second, except that it checks for an increase against the depth value 3 steps prior.
+If you participated that year and still have your IntCode VM laying around I do recommend you to dust it off and take it for a spin :).
 
-These high-level steps are now further broken down into more detailed flow charts with low-level instructions:
+If you do not have one already, or if you for some reason don't want to use it (clunky, inconvenient I/O, missing dependencies, ...?) I got you covered with my implementation:
 
-## Step 1 - "Scan input -> `depth[]`"
+- [Direct download](intcode_vm.cpp)
+- [On GitHub](https://github.com/relativisticturtle/intcode-adventure-2021/blob/main/intcode_vm.cpp)
+- C++ and standard libraries
 
-![Step 1 - "Scan input -> depth[]"](/assets/flowchart_step1.png)
+On these pages I will occasionally write commands on how to run IntCode-programs using this virtual machine. If you use your own (thumbs up!) you need to adapt those commands to what your implementation would expect. Other issues to be aware of are:
 
-- The integer `p` is used as a pointer (`*`) into the `depth`-buffer.
-- "`&depth`" here means the start address of this buffer. ("`depth`" only would have been more accurate - using C-notation, but I wanted to emphasize that it is an address. Or "`&depth[0]`" would have worked.)
-- The input is assumed to be 2000 in length. That's why it is checked whether the pointer is within this offset at every iteration.
+- How is `EOF` handled? What value is returned if attempting a `03`-operation when the input-buffer is empty? (My IntCode-programs assume `0` or a negative value).
+- Is input and output performed with decimal numbers or ASCII-encoded text? (My virtual machine defaults to ASCII-encoded, but has the option to perform I/O in decimal mode as well).
 
-For the second step the process is broken down in a similar fashion:
+## My IntCode VM
 
-## Step 2 - "Count occurences of `depth[i] < depth[i+1]`"
+During the 2019-round I coded a virtual machine running Python. The emphasis then was on flexibility rather than speed - you never knew what tomorrow's challenge would be. For this adventure I wanted something fast and minimal. I do *not* make any claim that it is the fastest or smallest implementation around - but it's much more so than what I had before at least.
 
-![Step 2 - "Count occurences of depth[i] < depth[i+1]"](/assets/flowchart_step2.png)
+### Usage
 
-- `c` is the variable counting occurrences
-- `q` and `s` are used as pointers into the `depth`-buffer. `q` is lagging `s` by one step.
-- We compare `*q` and `*s` but we don't have to implement any if-block for the comparison. The comparison itself is an operator that stores `0` or `1` into `r`, which we can simply add to the counter `c`.
+The virtual machine "`intcode_vm`" parses the IntCode-program to execute either from a file or from standard input.
 
-## Step 3
+From file:
 
-Let's wait a little with part 2. Maybe we can do something ~~clever~~ hack'ish...
+```
+intcode_vm hello.txt
+```
 
-## What did this achieve?
+From standard input:
 
-With this we have more-or-less written the *assembly code* solving part 1 of the puzzle! Not convinced? You think assembly code should have [cryptic mnemonics](https://en.wikipedia.org/wiki/Assembly_language#Mnemonics) and instructions such as "`MOV EAX, 2Ah`" and "`HCF`". (That's how I usually think of assembly code anyway).
+```
+intcode_vm
+<type your program here>
+```
 
-The important thing here is that every statement for step 1 and 2 in the flow charts above can be replaced with a single IntCode-instruction. How? *Stay tuned for the continuation on Day 3!*
+or:
+
+```
+cat hello.txt | intcode_vm          (Bash)
+type hello.txt 2>nul | intcode_vm   (Windows)
+```
+
+Only the first line is used in either case. In the latter case the standard input is delegated to the IntCode-program after this line. Thus input can be provided to the program either directly in the text-file (see [hello.txt](hello.txt) for an example) or by concatenation on the command-line:
+
+```
+cat day01.txt input01.txt | intcode_vm          (Bash)
+type day01.txt input01.txt 2>nul | intcode_vm   (Windows)
+```
+
+(Here `day01.txt` and `input01.txt` are the IntCode-program and puzzle-input, respectively, for Day 1).
+
+### Options
+
+To set the virtual machine in "decimal" (non-ASCII) mode:
+
+- Include the switch `-d` in the command-line invocation (`intcode_vm -d`), or
+- Have the IntCode-program end with a `D`. See [day01_golf.txt](2021/day01_golf.txt) for example.
+
+For some stats (program-length, instructions executed), include the switch `-v`.
+
+
+### Build using [MSVC](https://docs.microsoft.com/en-us/cpp/build/projects-and-build-systems-cpp):
+
+If you are at home with using the IDE, use that.
+
+I used the [command-line tools](https://docs.microsoft.com/en-us/cpp/build/reference/compiler-command-line-syntax):
+
+```
+cl /EHsc /O2 intcode_vm.cpp
+```
+
+... if the build environment is not already set up, run the appropriate `vcvars`-script before. For me this was:
+
+```
+"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64"
+```
+
+### Build using [GCC](https://gcc.gnu.org)
+
+Had I been on a GNU/Linux-computer (or had I had my MinGW up and ready to go) the GNU Compiler Collection would have been my first choice. Not tested, but *should* work:
+
+```
+g++ -O2 -o intcode intcode_vm.cpp
+```

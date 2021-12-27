@@ -28,15 +28,20 @@ One of these problem where there is a really elegant and consise solution if you
 
 &nbsp;
 
-# Memory layout
+# ...and Parsing
 
-I have touched upon the the memory layout of the IntCode-programs I build before. There is the code, global memory and local memory. Beyond that is what I call the stack memory. I don't know if it is the appropriate term, but anyway: it holds temporary calculations during expression evaluation.
+I think this is the part where my IntC-to-IntCode compiler is the most lacking. My parsing-routines are not beautiful, but here they are:
 
-![The memory layout of an IntCode-program](assets/memory_layout.png)
+```python
+parse_statement(text, code, row)
+read_variable_definition(code, row, is_global=False)
+read_forloop(code, row)
+read_ifelse(code, row)
+read_block(code, row)
+read_function(code, row)
+read_file(input_file)
+```
 
-During the compilation process the *local variables* of a function are assigned a position relative the memory frame of a function call. During execution a memory frame is allocated every time a function-call is made by incrementing the `RB`-register a certain amount.
+Of the common parameters, `code` is a list of lines making up the source text in a file and `row` is the current line that is to be parsed. Parsing starts at `read_file` and proceeds with recursive calls to these routines, generating the syntax tree. The logic to identify and discriminate between, e.g., a function call from an assignment or an `if`-statement is sloppy, to say the least. This is one reason why IntC is very rigid in its syntax.
 
-Each memory frame contains:
-- The parameters with which the function was called.
-- Local variables.
-- The address at which the function was invoked, so that execution can return once the function finishes.
+A better, more robust approach would have been using a [grammar](https://en.wikipedia.org/wiki/Context-free_grammar). While I knew about that possibility, I was not confident I could implement one of my own (and I wanted this to be my own creation, not relying on external libraries or copy&pasted code - even at the cost of sloppiness).
