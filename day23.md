@@ -44,40 +44,32 @@ IntC-code: [intcode_vm.c](https://github.com/relativisticturtle/intcode-adventur
 
 ## Usage
 
-To run an IntCode-program [hello.txt](hello.txt) using this (IntCode-) IntCode VM, simply feed it through the standard input:
+To run an IntCode-program `hello.txt` using this (IntCode-) IntCode VM, simply feed it through the standard input:
 
 ```
 $ intcode_vm intcode_vm.txt < hello.txt
 Hello Advent of Coders!
 ```
 
-In the source file `hello.txt` the first line is the IntCode-program, and any following text (if any) is provided to the program as *its* input.
+In the source file `hello.txt` the first line is the IntCode-program, and any following text (if any) is delegated to the program as *its* input. Check the [hello.txt](hello.txt) source for an example of providing input this way.
+
+Otherwise one can concatenate program and input on the command-line, using `cat` (Bash) or `type` (Windows), for a more elegant separation of program and input in different files. Here is an example for solving the day 1 puzzle with the (IntCode-) IntCode VM:
 
 ```
-109,302,21101,0,302,0,21101,10,3,1,1106,...
-Advent of Coders
+cat day01.txt input01.txt | intcode_vm intcode_vm.txt           (Bash)
+type day01.txt input01.txt 2>nul | intcode_vm intcode_vm.txt    (Windows)
 ```
+
+...and if using my [IntCode VM-implementation](https://github.com/relativisticturtle/intcode-adventure-2021/blob/main/intcode_vm.cpp) one can even put `intcode_vm.txt` in the stack of concatenated inputs for an equivalent invocation:
+
+```
+cat intcode_vm.txt day01.txt input01.txt | intcode_vm           (Bash)
+type intcode_vm.txt day01.txt input01.txt 2>nul | intcode_vm    (Windows)
+```
+
 
 ## Non-ASCII ("decimal") mode
-The (IntCode-) IntCode VM performs I/O in ASCI-mode per default, but has the option to operate in non-ASCII ("decimal") mode as well. To do that, append a `'D'` to the IntCode-program on the first line.
-
-This is useful for, e.g., my [golfed day 1 solution](2021/day01_golf.txt). The source file must then be formatted as follows to include
-
-- IntCode-program
-- `D`-switch for non-ASCII ("decimal") mode
-- Day 1 puzzle input
-
-```
-3,100,1001,1,1,1,1007,1,2100,98,1005,98,0,1101,0,0,99,1101,100,0,26,1001,26,1,27,7,0,0,98,1,99,98,99,1001,26,1,26,1007,27,2099,98,1005,98,21,4,99,107,1,23,98,1005,98,45,1101,3,0,23,1105,1,13,D
-109
-117
-118
-98
-102
-94
-101
-...
-```
+The (IntCode-) IntCode VM performs I/O in ASCI-mode per default, but has the option to operate in non-ASCII ("decimal") mode as well. To do that, append a `'D'` to the IntCode-program on the first line. See, e.g., my [golfed day 1 solution](2021/day01_golf.txt) for an example.
 
 ## Solving day 1 - again
 For reference, consider again my [golfed day 1 solution](2021/day01_golf.txt):
