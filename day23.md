@@ -46,8 +46,8 @@ IntC-code: [intcode_vm.c](https://github.com/relativisticturtle/intcode-adventur
 
 To run an IntCode-program `hello.txt` using this (IntCode-) IntCode VM, simply feed it through the standard input:
 
-```
-$ intcode_vm intcode_vm.txt < hello.txt
+```console
+> intcode_vm intcode_vm.txt < hello.txt
 Hello Advent of Coders!
 ```
 
@@ -55,16 +55,16 @@ In the source file `hello.txt` the first line is the IntCode-program, and any fo
 
 Otherwise one can concatenate program and input on the command-line, using `cat` (Bash) or `type` (Windows), for a more elegant separation of program and input in different files. Here is an example for solving the day 1 puzzle with the (IntCode-) IntCode VM:
 
-```
-cat day01.txt input01.txt | intcode_vm intcode_vm.txt           (Bash)
-type day01.txt input01.txt 2>nul | intcode_vm intcode_vm.txt    (Windows)
+```console
+$ cat day01.txt input01.txt | intcode_vm intcode_vm.txt         (Bash)
+> type day01.txt input01.txt 2>nul | intcode_vm intcode_vm.txt  (Windows)
 ```
 
 ...and if using my [IntCode VM-implementation](https://github.com/relativisticturtle/intcode-adventure-2021/blob/main/intcode_vm.cpp) one can even put `intcode_vm.txt` in the stack of concatenated inputs for an equivalent invocation:
 
-```
-cat intcode_vm.txt day01.txt input01.txt | intcode_vm           (Bash)
-type intcode_vm.txt day01.txt input01.txt 2>nul | intcode_vm    (Windows)
+```console
+$ cat intcode_vm.txt day01.txt input01.txt | intcode_vm         (Bash)
+> type intcode_vm.txt day01.txt input01.txt 2>nul | intcode_vm  (Windows)
 ```
 
 
@@ -74,8 +74,8 @@ The (IntCode-) IntCode VM performs I/O in ASCI-mode per default, but has the opt
 ## Solving day 1 - again
 For reference, consider again my [golfed day 1 solution](2021/day01_golf.txt):
 
-```
-> type 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v                
+```console
+> type day01_golf.txt input01.txt 2>nul | intcode_vm -v                
 60 integers read
 -------------------------
 1448
@@ -88,8 +88,8 @@ done! 31989 instructions executed.
 
 Running the same program through a layer of (IntCode-) IntCode VM:
 
-```
-> type intcode_vm.txt 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v
+```console
+> type intcode_vm.txt day01_golf.txt input01.txt 2>nul | intcode_vm -v
 8033 integers read
 -------------------------
 1448
@@ -105,8 +105,8 @@ done! 266756368 instructions executed.
 
 Once, more - right? *right?!* Let's run with one more layer of IntCode VMs:
 
-```
-> type intcode_vm.txt intcode_vm.txt 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v
+```console
+> type intcode_vm.txt intcode_vm.txt day01_golf.txt input01.txt 2>nul | intcode_vm -v
 8033 integers read
 -------------------------
 Illegal access: code[1008067+0]
@@ -118,8 +118,8 @@ What to do? Give up? *No!* If we could only make `code[]`, the buffer holding th
 
 Second attempt, go!
 
-```
-> type intcode_vm.txt intcode_vm.txt 2021\day01_golf.txt 2021\input01.txt 2>nul | intcode_vm -v
+```console
+> type intcode_vm.txt intcode_vm.txt day01_golf.txt input01.txt 2>nul | intcode_vm -v
 8033 integers read
 -------------------------
 ```

@@ -67,29 +67,29 @@ The virtual machine "`intcode_vm`" parses the IntCode-program to execute either 
 
 From file:
 
-```
-intcode_vm hello.txt
+```console
+> intcode_vm hello.txt
 ```
 
 From standard input:
 
-```
-intcode_vm
+```console
+> intcode_vm
 <type your program here>
 ```
 
 or:
 
-```
-cat hello.txt | intcode_vm          (Bash)
-type hello.txt 2>nul | intcode_vm   (Windows)
+```console
+$ cat hello.txt | ./intcode_vm        (Bash)
+> type hello.txt 2>nul | intcode_vm   (Windows)
 ```
 
 Only the first line is used in either case. In the latter case the standard input is delegated to the IntCode-program after this line. Thus input can be provided to the program either directly in the text-file (see [hello.txt](hello.txt) for an example) or by concatenation on the command-line:
 
-```
-cat day01.txt input01.txt | intcode_vm          (Bash)
-type day01.txt input01.txt 2>nul | intcode_vm   (Windows)
+```console
+$ cat day01.txt input01.txt | ./intcode_vm        (Bash)
+> type day01.txt input01.txt 2>nul | intcode_vm   (Windows)
 ```
 
 (Here `day01.txt` and `input01.txt` are the IntCode-program and puzzle-input, respectively, for Day 1).
@@ -110,20 +110,20 @@ If you are at home with using the IDE, use that.
 
 I used the [command-line tools](https://docs.microsoft.com/en-us/cpp/build/reference/compiler-command-line-syntax):
 
-```
-cl /EHsc /O2 intcode_vm.cpp
+```console
+> cl /EHsc /O2 intcode_vm.cpp
 ```
 
 ... if the build environment is not already set up, run the appropriate `vcvars`-script before. For me this was:
 
 ```
-"C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64"
+> "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64"
 ```
 
 ### Build using [GCC](https://gcc.gnu.org)
 
 Had I been on a GNU/Linux-computer (or had I had my MinGW up and ready to go) the GNU Compiler Collection would have been my first choice. Not tested, but *should* work:
 
-```
-g++ -O2 -o intcode intcode_vm.cpp
+```console
+$ g++ -O2 -o intcode intcode_vm.cpp
 ```
