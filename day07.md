@@ -53,6 +53,8 @@ Nothing clever. Just loop through every target position and crab in both parts.
 
 &nbsp;
 
+<a name="intcs-not-technically-c"></a>
+
 # **I**ntC's **n**ot **t**echnically **C**
 
 Formally introducing \*drumroll\*: "**I**ntC's **n**ot **t**echnically **C**"  ("**IntC**" for short).
