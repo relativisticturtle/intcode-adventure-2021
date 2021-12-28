@@ -86,6 +86,8 @@ Position    Variable- or jump-location
 1101,100,0,5,3,0,1001,5,1,5,1007,5,2100,98,1005,98,4,1101,0,0,99,1101,100,0,30,1001,30,1,31,7,0,0,98,1,99,98,99,1001,30,1,30,1007,31,2099,98,1005,98,25,4,99,1101,0,0,99,1101,100,0,63,1001,63,3,64,7,0,0,98,1,99,98,99,1001,63,1,63,1007,64,2099,98,1005,98,58,4,99,99
 ```
 
+**Note:** When running, mind the I/O-mode as discussed [yesterday](day04.md#running-the-intcode).
+
 ## Golfing
 Our current program is 84 integers long. Quite good! We guessed we could write the code with less than 95 integers yesterday and we succeeded with a small margin of 11 integers. (Had we exceeded our initial guess we would just have to reassign `r`, `c` and `depth[]` to higher positions).
 
@@ -158,6 +160,8 @@ A second pass with all substitutions yields:
 3,100,1001,1,1,1,1007,1,2100,98,1005,98,0,1101,0,0,99,1101,100,0,26,1001,26,1,27,7,0,0,98,1,99,98,99,1001,26,1,26,1007,27,2099,98,1005,98,21,4,99,107,1,23,98,1005,98,45,1101,3,0,23,1105,1,13
 ```
 
-Now down to 60 integers. (*Yeah!*)
+Now down to 60 integers. *Yeah!*
+
+(...and again: the VM needs to run this program in "decimal"/non-ASCII [I/O-mode](day04.md#running-the-intcode)).
 
 That concludes the handcoding of Day 1's puzzle. Great job!

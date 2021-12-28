@@ -114,7 +114,7 @@ Illegal access: code[1008067+0]
 
 Oops! Memory access error... Why? Ah, of course! To put it simply: We have attempted to put one of two *equally sized* boxes inside the other. This implementation of the IntCode VM statically allocates a buffer of 1M integers for the code, but it cannot put a program of its own size in there.
 
-What to do? Give up? *No!* If we could only make `code[]`, the buffer holding the IntCode-program, start beyond all [code-sections, global & local memory-sections, and stack-sections](day11.md)... Hmm... The reason it is not already is because of the compiler design, but it can be circumvented. We simply hard-code the `code`-pointer to a memory address at 10000 (should be sufficient) without ever declaring it as an array of any sort. Modern compilers would probably complain. Mine? Not so much.
+What to do? Give up? *No!* If we could only make `code[]`, the buffer holding the IntCode-program, start beyond all [code-sections, global & local memory-sections, and stack-sections](day11.md#memory-layout)... Hmm... The reason it is not already is because of the compiler design, but it can be circumvented. We simply hard-code the `code`-pointer to a memory address at 10000 (should be sufficient) without ever declaring it as an array of any sort. Modern compilers would probably complain. Mine? Not so much.
 
 Second attempt, go!
 

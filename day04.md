@@ -219,14 +219,19 @@ Position    Statement           IntCode
 Please try this IntCode-program on your input from the [2021 Day 1 puzzle](https://adventofcode.com/2021/day/1). It should solve part 1 of the puzzle.
 
 ## Running the IntCode
-As discussed on a [day 2](day02.md), you need an IntCode VM. If you have our own, great! Let's put it to some use :). If not, don't worry, I have you covered. The [day 2-page](day02.md) has a C++ implementation with instructions on how to build and use.
+As discussed on day 2, you need an IntCode VM. If you have our own, great! Let's put it to some use :). If not, don't worry, I have you covered. The [day 2-page](day02.md#the-intcode-vm) has a C++ implementation with instructions on how to build and use.
 
 **Note 1:** The IntCode-program we constructed here reads and writes direct integers ("decimal", non-ASCII mode). This is different from the other IntCode puzzle solutions I have uploaded here. They read and write ASCII-encoded strings. While this makes the programs more flexible and capable with respect to puzzle-input format, and more, the code to process the ASCII-strings would be many times the current program in size. Therefore, when running the program through the IntCode VM, make sure it does *NOT* operate in ASCII-mode.
 
-With the provided IntCode VM (above) this is achieved by supplying the `-d` flag when running:
+With the [provided IntCode VM](day02.md#the-intcode-vm) this is achieved by supplying the `-d` flag when running:
 
 ```
 intcode_vm -d day01_manually.txt < input01.txt
+```
+
+...or by appending a `D` to the IntCode-program itself:
+```
+1101,100,0,...<same as above>...,25,4,99,99,D
 ```
 
 **Note 2:** Remember that we have hardcoded the input size from the sonar sweep to 2000 values. The program will not be accurate for other sizes.
