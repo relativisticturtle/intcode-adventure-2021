@@ -1,8 +1,0 @@
-theme: jekyll-theme-midnight
-plugins:
-  - jekyll-relative-links
-relative_links:
-  enabled: true
-  collections: true
-title: Advent of IntCode 2021
-description: We're going on an IntCode-adventure!

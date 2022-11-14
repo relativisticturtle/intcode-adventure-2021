@@ -1,46 +1,9 @@
----
-day: 23
-prev: day22
-this: day23
-next: day24
-title: Day 23
-puzzle: Amphipod
----
-# {{ page.title }}
-
-## [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
-
-The amphipods give you their sincere thanks after receiving the plan for how they should organize themselves with minimum cost. You watch as the move according to the carefully orchestrated plan. When they are nearly finished you realize that there was actually an *even more* optimal solution.
-
-"Stop! Everyone go back. Do you remember where you started? Let's do this again from the beginning!"
-
-## Solution
-
-Today I truly learned A-star :).
-
-**IntCode:** [{{ page.this }}.txt](2021/{{ page.this }}.txt) &#124; **C lite:** [{{ page.this }}.c](2021/{{ page.this }}.c)
-{% capture RAW_INTCODE %}{% include_relative 2021/{{ page.this }}.txt %}{% endcapture %}
-
-```
-{{RAW_INTCODE}}
-```
-
-&nbsp;
-
 # Yo Dawg, I heard you like IntCode...
 
 *...so I put IntCode in your IntCode VM so you can run IntCode while you run IntCode!*
 
-It had to be done. Here's an IntCode virtual machine implemented in IntCode:
-
-{% capture RAW_INTCODE %}{% include_relative intcode_vm.txt %}{% endcapture %}
-
-```
-{{RAW_INTCODE}}
-```
-Download: [intcode_vm.txt](intcode_vm.txt)
-
-IntC-code: [intcode_vm.c](https://github.com/relativisticturtle/intcode-adventure-2021/blob/main/intcode_vm.c) from which the IntCode was generated.
+It had to be done. Here's an IntCode virtual machine implemented in IntCode: [intcode_vm.txt](intcode_vm.txt)
+(and the IntC-code from which the IntCode was generated: [intcode_vm.c](intcode_vm.c)).
 
 ## Usage
 
@@ -60,7 +23,7 @@ $ cat day01.txt input01.txt | intcode_vm intcode_vm.txt         (Bash)
 > type day01.txt input01.txt 2>nul | intcode_vm intcode_vm.txt  (Windows)
 ```
 
-...and if using my [IntCode VM-implementation](https://github.com/relativisticturtle/intcode-adventure-2021/blob/main/intcode_vm.cpp) one can even put `intcode_vm.txt` in the stack of concatenated inputs for an equivalent invocation:
+...and if using my [IntCode VM-implementation](intcode_vm.cpp) one can even put `intcode_vm.txt` in the stack of concatenated inputs for an equivalent invocation:
 
 ```console
 $ cat intcode_vm.txt day01.txt input01.txt | intcode_vm         (Bash)
@@ -114,7 +77,7 @@ Illegal access: code[1008067+0]
 
 Oops! Memory access error... Why? Ah, of course! To put it simply: We have attempted to put one of two *equally sized* boxes inside the other. This implementation of the IntCode VM statically allocates a buffer of 1M integers for the code, but it cannot put a program of its own size in there.
 
-What to do? Give up? *No!* If we could only make `code[]`, the buffer holding the IntCode-program, start beyond all [code-sections, global & local memory-sections, and stack-sections](day11.md#memory-layout)... Hmm... The reason it is not already is because of the compiler design, but it can be circumvented. We simply hard-code the `code`-pointer to a memory address at 10000 (should be sufficient) without ever declaring it as an array of any sort. Modern compilers would probably complain. Mine? Not so much.
+What to do? Give up? *No!* If we could only make `code[]`, the buffer holding the IntCode-program, start beyond all other sections-sections... Hmm... The reason it is not already is because of the compiler design, but it can be circumvented. We simply hard-code the `code`-pointer to a memory address at 10000 (should be sufficient) without ever declaring it as an array of any sort. Modern compilers would probably complain. Mine? Not so much.
 
 Second attempt, go!
 

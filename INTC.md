@@ -1,60 +1,3 @@
----
-day: 7
-prev: day06
-this: day07
-next: day08
-title: Day 7
-puzzle: The Treachery of Whales
----
-# {{ page.title }}
-
-## [{{ page.puzzle }}](https://adventofcode.com/2021/day/{{ page.day }})
-
-Everything has been thrown into disarray by the collision. There is a dent where the whale hit.
-
-"Divert all power from life support to the deflector shields!"
-
-*We don't have deflector shields*
-
-"Do evasive maneuvers! 50 degrees port, 30 degrees down, 120 degrees starboard, and roll 540 degrees clockwise!"
-
-*Is that wise?*
-
-"Do it!"
-
-The submarine twists an turns as `I2C2` executes your instructions. Everything is now in more disarray, and up-side down. Silence.
-
-"Did we shake off the whale?", you ask optimistically.
-
-*I tried to tell -* `I2C2` begins, but is interrupted by a second hit. Water sprays from a bolt. *- you that there is no chance we can outrun the whale. Evasive maneuvers or not.*
-
-"Do... Do we have any weapons?"
-
-*Negative. We have Christmas light decorating the hull.*
-
-"Divert all power from life support to the Christmas lights!"
-
-*That's not necessary. They don't consume that much power...*
-
-"Do it!"
-
-
-
-## Solution
-
-Nothing clever. Just loop through every target position and crab in both parts.
-
-**IntCode:** [{{ page.this }}.txt](2021/{{ page.this }}.txt) &#124; **C lite:** [{{ page.this }}.c](2021/{{ page.this }}.c)
-{% capture RAW_INTCODE %}{% include_relative 2021/{{ page.this }}.txt %}{% endcapture %}
-
-```
-{{RAW_INTCODE}}
-```
-
-&nbsp;
-
-<a name="intcs-not-technically-c"></a>
-
 # **I**ntC's **n**ot **t**echnically **C**
 
 Formally introducing \*drumroll\*: "**I**ntC's **n**ot **t**echnically **C**"  ("**IntC**" for short).
@@ -94,7 +37,7 @@ In local scope (inside a function definition) this is not allowed. Nor is it all
   z = 42;       // OK
 ```
 
-The ampersand `&` yields the address of a variable. The asterisk `*` is only used for multiplication and cannot be used for dereferencing pointers (as in C). The same thing can be achieved with array dereferncing at index 0: `ptr[0]`. Examples:
+The ampersand `&` yields the address of a variable. The asterisk `*` is only used for multiplication and cannot be used for dereferencing pointers (as in C). The same thing can be achieved with array dereferencing at index 0: `ptr[0]`. Examples:
 
 ```c
 int a;
@@ -229,4 +172,14 @@ void main() {
     prints(message);
     print(10); // Line feed: '\n'
 }
+```
+
+## Compiler
+
+The one-and-only [IntCode compiler](intcode_cc.py), written in pure Python 3, no external dependencies.
+
+To compile an IntC-file into beautiful IntCode:
+
+```
+python intcode_cc.py -i <input IntC-file> -o <output IntCode-file>
 ```
